@@ -1,7 +1,10 @@
+# eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3ROYW1lIjoiZmlyc3RuYW1lIiwiaWF0IjoxNjU3MTExNzI1LCJleHAiOjE2ODg2NjkzMjV9.XI3htgOYZC-M2h4skEY-NNSInKxFICbQhyzAY-TeV9I
 GET http://localhost:3000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3ROYW1lIjoiZmlyc3RuYW1lIiwiaWF0IjoxNjU3MTExNzI1LCJleHAiOjE2ODg2NjkzMjV9.XI3htgOYZC-M2h4skEY-NNSInKxFICbQhyzAY-TeV9I
 
 ###
-GET http://localhost:3000/users/2
+GET http://localhost:3000/users/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3ROYW1lIjoiZmlyc3RuYW1lIiwiaWF0IjoxNjU3MTExNzI1LCJleHAiOjE2ODg2NjkzMjV9.XI3htgOYZC-M2h4skEY-NNSInKxFICbQhyzAY-TeV9I
 
 ###
 POST http://localhost:3000/users
@@ -13,8 +16,9 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:3000/users/3
+PUT http://localhost:3000/users/1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3ROYW1lIjoiZmlyc3RuYW1lIiwiaWF0IjoxNjU3MTExNzI1LCJleHAiOjE2ODg2NjkzMjV9.XI3htgOYZC-M2h4skEY-NNSInKxFICbQhyzAY-TeV9I
 
 {
   "firstName": "updated",
@@ -23,24 +27,6 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/users/2
+DELETE http://localhost:3000/users/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoiVGhlIHJlcXVlc3QgaGFzIHN1Y2NlZWRlZC4iLCJpYXQiOjE2NTcwMjY5NDksImV4cCI6MTY4ODU4NDU0OX0.Z-f6jbd_wQu6Ae-lDQCqZoYh9cHqZ92f9W7rYjV_2l0
 
-###
-POST http://localhost:3000/register
-Content-Type: application/json
-
-{
-    "email": "203@test.com",
-    "password": "OKOKOKOK",
-    "firstName": "The request has succeeded."
-}
-
-###
-POST http://localhost:3000/login
-Content-Type: application/json
-
-{
-    "email": "203@test.com",
-    "password": "OKOKOKOK"
-}

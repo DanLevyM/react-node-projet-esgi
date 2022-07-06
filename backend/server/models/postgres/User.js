@@ -8,8 +8,9 @@ User.init(
 	{
 		email: {
 			type: DataTypes.STRING,
-			allowNull: true,
-			unique: false,
+			allowNull: false,
+			unique: true,
+			require: true,
 			validate: {
 				isEmail: true,
 			},
@@ -27,8 +28,8 @@ User.init(
 		firstName: {
 			type: DataTypes.STRING,
 			allowNull: false,
-			require: true,
-			unique: true,
+			unique: false,
+			require: false,
 			validate: {
 				len: {
 					min: 3,
@@ -54,10 +55,13 @@ User.init(
 );
 
 const hashPassword = async (user) => {
+	console.log("======================", user.password);
+
 	user.password = await bcryptjs.hash(
 		user.password,
 		await bcryptjs.genSalt(10)
 	);
+	console.log("======================", user.password);
 };
 
 User.addHook("beforeCreate", hashPassword);

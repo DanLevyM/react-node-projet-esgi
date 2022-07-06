@@ -1,18 +1,12 @@
 const { Router } = require("express");
 const { ValidationError } = require("sequelize");
 const { User } = require("../models/postgres");
-// const checkAuthentication = require("../middlewares/checkAuthentication");
+const { formatError } = require("../utils/formatError");
+const checkAuthentication = require("../middlewares/checkAuth");
 
 const router = new Router();
 
-function formatError(error) {
-	return error.errors.reduce((acc, err) => {
-		acc[err.path] = err.message;
-		return acc;
-	}, {});
-}
-
-router.get("/users", async (req, res) => {
+router.get("/users", checkAuthentication, async (req, res) => {
 	try {
 		const result = await User.findAll({ where: req.query });
 		res.json(result);
@@ -58,7 +52,7 @@ router.delete("/users/:id", async (req, res) => {
 	}
 });
 
-router.put("/users/:id", async (req, res) => {
+router.put("/users/:id", checkAuthentication, async (req, res) => {
 	try {
 		const [, rows] = await User.update(req.body, {
 			where: { id: parseInt(req.params.id, 10) },
@@ -80,7 +74,7 @@ router.put("/users/:id", async (req, res) => {
 	}
 });
 
-router.get("/users/:id", async (req, res) => {
+router.get("/users/:id", checkAuthentication, async (req, res) => {
 	try {
 		const result = await User.findByPk(req.params.id);
 		if (!result) {

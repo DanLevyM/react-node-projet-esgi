@@ -3,6 +3,7 @@ const express = require("express");
 // External dependancy
 // Domain related modules
 const UserRouter = require("./routes/users");
+const SecurityRouter = require("./routes/security");
 
 const app = express();
 app.use(express.json());
@@ -15,6 +16,7 @@ app.get("/", (req, res) => {
 });
 
 app.use(UserRouter);
+app.use(SecurityRouter);
 
 app.listen(PORT, () => {
 	console.log(`Server running on port ${PORT}`);
