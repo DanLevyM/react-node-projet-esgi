@@ -1,7 +1,4 @@
 const { Router } = require("express");
-const { ValidationError } = require("sequelize");
-const { User } = require("../models/postgres");
-const { formatError } = require("../utils/formatError");
 const checkAuthentication = require("../middlewares/check-auth");
 const {
 	getUser,
@@ -18,23 +15,7 @@ router
 	.get(checkAuthentication, getUser)
 	.put(checkAuthentication, updateUser)
 	.delete(checkAuthentication, deleteUser);
-
-// TODO Move to admin route
-router.post("/users", async (req, res) => {
-	try {
-		console.log("==================", req.body);
-		const result = await User.create(req.body);
-		res.status(201).json(result);
-	} catch (error) {
-		if (error instanceof ValidationError) {
-			console.error(error);
-			res.status(422).json(formatError(error));
-		} else {
-			res.sendStatus(500);
-			console.error(error);
-		}
-	}
-});
+// TODO delete my Account
 
 module.exports = router;
 

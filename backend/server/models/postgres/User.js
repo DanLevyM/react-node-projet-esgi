@@ -47,6 +47,10 @@ User.init(
 				},
 			},
 		},
+		role: {
+			type: DataTypes.ENUM("admin", "user"),
+			defaultValue: "user",
+		},
 	},
 	{
 		sequelize: connection,
@@ -55,13 +59,10 @@ User.init(
 );
 
 const hashPassword = async (user) => {
-	console.log("======================", user.password);
-
 	user.password = await bcryptjs.hash(
 		user.password,
 		await bcryptjs.genSalt(10)
 	);
-	console.log("======================", user.password);
 };
 
 User.addHook("beforeCreate", hashPassword);
