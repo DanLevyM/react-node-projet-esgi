@@ -8,7 +8,7 @@ stop:
 	docker-compose down
 
 restart:
-	docker-compose down && docker-compose up -d
+	docker-compose down && docker-compose up
 
 restartvol:
 	docker-compose down --volumes && docker-compose up

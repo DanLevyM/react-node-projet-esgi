@@ -1,15 +1,13 @@
-const bcryptjs = require("bcryptjs");
-const { Router } = require("express");
+const User = require("../models/postgres/User");
 const { ValidationError } = require("sequelize");
-const { User } = require("../models/postgres");
-const { createToken } = require("../lib/tokenManager.js");
 const { formatError } = require("../utils/formatError");
+const bcryptjs = require("bcryptjs");
+const { createToken } = require("../lib/tokenManager.js");
 
-const router = new Router();
-
-router.post("/register", async (req, res) => {
+exports.register = async (req, res) => {
 	try {
 		const result = await User.create(req.body);
+		console.log("USER CREATED ====================================", result);
 		res.status(201).json(result);
 	} catch (error) {
 		if (error instanceof ValidationError) {
@@ -20,11 +18,15 @@ router.post("/register", async (req, res) => {
 			res.sendStatus(500);
 		}
 	}
-});
+};
 
-router.post("/login", async (req, res) => {
+exports.login = async (req, res) => {
 	try {
-		const result = await User.findOne({ email: req.body.email });
+		console.log(req.body.email);
+		const result = await User.findOne({
+			where: { email: req.body.email },
+		});
+		console.log("result ==============================", result);
 		if (
 			result &&
 			(await bcryptjs.compare(req.body.password, result.password))
@@ -44,6 +46,4 @@ router.post("/login", async (req, res) => {
 			console.error(error);
 		}
 	}
-});
-
-module.exports = router;
+};

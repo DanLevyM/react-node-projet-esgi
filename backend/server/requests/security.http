@@ -1,18 +1,18 @@
-POST http://localhost:3000/register
+POST http://localhost:3000/api/v1/register
 Content-Type: application/json
 
 {
-  "email": "2032@test.com",
+  "email": "qqqa@test.com",
   "password": "OKOKOKO2K",
-  "firstName": "firstname"
+  "firstName": "firstnameTEST"
 }
 
 ###
-POST http://localhost:3000/login
+POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "email": "2032@test.com",
+  "email": "qqqa@test.com",
   "password": "OKOKOKO2K",
-  "firstName": "firstname"
+  "firstName": "firstnameTEST"
 }
