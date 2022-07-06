@@ -1,0 +1,22 @@
+GET http://localhost:3000/api/v1/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZmlyc3ROYW1lIjoiZmlyc3RuYW1lVEVTVCIsImlhdCI6MTY1NzExNzA0MiwiZXhwIjoxNjg4Njc0NjQyfQ.HKUtzrqx8xgKvDVgrW3KPShrCdnc4ZKGg-IkBUdwQrU
+
+###
+GET http://localhost:3000/api/v1/users/5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3ROYW1lIjoiZmlyc3RuYW1lIiwiaWF0IjoxNjU3MTExNzI1LCJleHAiOjE2ODg2NjkzMjV9.XI3htgOYZC-M2h4skEY-NNSInKxFICbQhyzAY-TeV9I
+
+###
+PUT http://localhost:3000/api/v1/users/5
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZmlyc3ROYW1lIjoiZmlyc3RuYW1lIiwiaWF0IjoxNjU3MTE0ODE2LCJleHAiOjE2ODg2NzI0MTZ9.PVjZwgnKpJYQSUt8EJNXgB2XIfxw65wIv0MbH1LnQ8Q
+
+{
+  "firstName": "updated",
+  "lastName": "updated lastName",
+  "password": "asdasdasd"
+}
+
+###
+DELETE http://localhost:3000/api/v1/users/7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZmlyc3ROYW1lIjoiZmlyc3RuYW1lVEVTVCIsImlhdCI6MTY1NzExNzA0MiwiZXhwIjoxNjg4Njc0NjQyfQ.HKUtzrqx8xgKvDVgrW3KPShrCdnc4ZKGg-IkBUdwQrU
+

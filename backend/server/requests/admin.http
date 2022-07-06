@@ -1,0 +1,10 @@
+###
+POST http://localhost:3000/api/v1/adduser
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoiZmlyc3RuYW1lVEVTVCIsImlhdCI6MTY1NzExODUxMSwiZXhwIjoxNjg4Njc2MTExfQ.DC-fKNSKFdMrEs0CcagWdX0jE5B5_FJfdw5tMwGP0-w
+
+{
+  "email": "deaoaw@gmail.com",
+  "firstName": "firstName 1",
+  "password": "OKOdewKOKOK"
+}
