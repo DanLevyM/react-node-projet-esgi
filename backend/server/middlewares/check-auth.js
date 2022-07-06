@@ -1,4 +1,4 @@
-const { verifyToken } = require("../lib/tokenManager.js");
+const { verifyToken } = require("../lib/token-manager.js");
 
 module.exports = async (req, res, next) => {
 	const auth = req.headers.authorization;

@@ -1,10 +1,18 @@
-###
 POST http://localhost:3000/api/v1/adduser
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoiZmlyc3RuYW1lVEVTVCIsImlhdCI6MTY1NzExODUxMSwiZXhwIjoxNjg4Njc2MTExfQ.DC-fKNSKFdMrEs0CcagWdX0jE5B5_FJfdw5tMwGP0-w
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZmlyc3ROYW1lIjoiZmlyc3RuYW1lVEVTVCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjU3MTIwODMyLCJleHAiOjE2ODg2Nzg0MzJ9.zMb6R5K_YLMgGUCiIfpSMK3y8Z0bGj-z4IXfBIoON1g
 
 {
-  "email": "deaoaw@gmail.com",
+  "email": "deaeewwoaw@gmail.com",
   "firstName": "firstName 1",
   "password": "OKOdewKOKOK"
 }
+
+### 
+GET http://localhost:3000/api/v1/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoiZmlyc3RuYW1lVEVTVCIsImlhdCI6MTY1NzExODUxMSwiZXhwIjoxNjg4Njc2MTExfQ.DC-fKNSKFdMrEs0CcagWdX0jE5B5_FJfdw5tMwGP0-w
+
+
+
+# admin eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZmlyc3ROYW1lIjoiZmlyc3RuYW1lVEVTVCIsImlhdCI6MTY1NzEyMDA0MSwiZXhwIjoxNjg4Njc3NjQxfQ.QOsso2bW6keiRSAaMRm-CpwiVZCsTSeAYuaOrr6xbkE
+# user eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZmlyc3ROYW1lIjoiZmlyc3RuYW1lVEVTVCIsImlhdCI6MTY1NzEyMDA2OCwiZXhwIjoxNjg4Njc3NjY4fQ.NkWL4IKuIgNoM-6rd0W9R_lGF-MLEhBQmaTbs4x03Vc

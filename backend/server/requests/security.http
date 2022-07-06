@@ -2,9 +2,10 @@ POST http://localhost:3000/api/v1/register
 Content-Type: application/json
 
 {
-  "email": "qqqa@test.com",
+  "email": "aaaaa@test.com",
   "password": "OKOKOKO2K",
-  "firstName": "firstnameTEST"
+  "firstName": "firstnameTEST",
+  "role": "usaer"
 }
 
 ###
@@ -12,7 +13,7 @@ POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "email": "qqqa@test.com",
+  "email": "aaaaa@test.com",
   "password": "OKOKOKO2K",
   "firstName": "firstnameTEST"
 }
