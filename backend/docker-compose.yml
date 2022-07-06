@@ -24,6 +24,7 @@ services:
       - MONGO_URL=mongodb://root:password@mongo:27017/app?authSource=admin
       - DB_URL=postgres://root:password@db/app
       - JWT_SECRET=mySecret
+      - NODE_ENV=development
     ports:
       - 127.0.0.1:3000:3000
     command: npm start

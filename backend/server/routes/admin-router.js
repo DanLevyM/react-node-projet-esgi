@@ -1,13 +1,17 @@
 const { Router } = require("express");
 const checkAuthentication = require("../middlewares/check-auth");
-const { addUser } = require("../controllers/admin-controller");
+const {
+	addUser,
+	deleteUser,
+	updateUser,
+} = require("../controllers/admin-controller");
 const { authorize } = require("../middlewares/authorize");
 const router = new Router();
 
 router.route("/adduser").post(checkAuthentication, authorize("admin"), addUser);
+router
+	.route("/user/:id")
+	.delete(checkAuthentication, authorize("admin"), deleteUser)
+	.put(checkAuthentication, authorize("admin"), updateUser);
 
 module.exports = router;
-
-// TODO handle PUT for admin and users
-// TODO post.user for admin
-// TODO delete.user for admin

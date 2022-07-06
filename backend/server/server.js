@@ -1,4 +1,6 @@
+/* eslint-disable no-undef */
 const express = require("express");
+const morgan = require("morgan");
 const UserRouter = require("./routes/users-router");
 const SecurityRouter = require("./routes/security-router");
 const AdminRouter = require("./routes/admin-router");
@@ -6,16 +8,15 @@ const AdminRouter = require("./routes/admin-router");
 const app = express();
 app.use(express.json());
 
-// eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 3000;
 
-app.get("/", (req, res) => {
-	res.send("hello world");
-});
+if (process.env.NODE_ENV === "development") {
+	app.use(morgan("dev"));
+}
 
-app.use("/api/v1", UserRouter);
-app.use("/api/v1", SecurityRouter);
-app.use("/api/v1", AdminRouter);
+app.use("/api/v1/users", UserRouter);
+app.use("/api/v1/auth", SecurityRouter);
+app.use("/api/v1/admin", AdminRouter);
 
 app.listen(PORT, () => {
 	console.log(`Server running on port ${PORT}`);

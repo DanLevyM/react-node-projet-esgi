@@ -3,23 +3,20 @@ const checkAuthentication = require("../middlewares/check-auth");
 const {
 	getUser,
 	getUsers,
-	deleteUser,
-	updateUser,
+	deleteMe,
+	updateMe,
+	getMe,
 } = require("../controllers/user-controller");
 
 const router = new Router();
 
-router.route("/users").get(checkAuthentication, getUsers);
+router.route("/").get(checkAuthentication, getUsers);
+router.route("/me").get(checkAuthentication, getMe);
+
 router
-	.route("/users/:id")
+	.route("/:id")
 	.get(checkAuthentication, getUser)
-	.put(checkAuthentication, updateUser)
-	.delete(checkAuthentication, deleteUser);
-// TODO delete my Account
+	.put(checkAuthentication, updateMe)
+	.delete(checkAuthentication, deleteMe);
 
 module.exports = router;
-
-// TODO handle delete only for its own account
-// TODO handle PUT for admin and users
-// TODO post.user for admin
-// TODO delete.user for admin
