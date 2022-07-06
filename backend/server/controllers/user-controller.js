@@ -26,7 +26,7 @@ exports.getUser = async (req, res) => {
 	}
 };
 
-exports.deleteUser = async (req, res) => {
+exports.deleteMe = async (req, res) => {
 	console.log("======================", req.user, parseInt(req.params.id, 10));
 	if (req.user.id !== parseInt(req.params.id, 10)) {
 		return res.sendStatus(403);
@@ -46,7 +46,10 @@ exports.deleteUser = async (req, res) => {
 	}
 };
 
-exports.updateUser = async (req, res) => {
+exports.updateMe = async (req, res) => {
+	if (req.user.id !== parseInt(req.params.id, 10)) {
+		return res.sendStatus(403);
+	}
 	try {
 		const [, rows] = await User.update(req.body, {
 			where: { id: parseInt(req.params.id, 10) },
@@ -65,5 +68,15 @@ exports.updateUser = async (req, res) => {
 			res.sendStatus(500);
 			console.error(error);
 		}
+	}
+};
+
+exports.getMe = async (req, res) => {
+	try {
+		const result = await User.findOne({ where: { id: req.user.id } });
+		res.json(result);
+	} catch (error) {
+		res.sendStatus(500);
+		console.error(error);
 	}
 };

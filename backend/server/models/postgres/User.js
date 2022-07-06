@@ -20,7 +20,7 @@ User.init(
 			allowNull: false,
 			validate: {
 				len: {
-					min: 8,
+					min: 4,
 					max: 255,
 				},
 			},
