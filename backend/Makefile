@@ -1,8 +1,8 @@
 build:
-	docker-compose up -d && docker exec express_server_1 npm run migrate
+	docker-compose up && docker exec server_c npm run migrate
 
 start:
-	docker-compose up -d
+	docker-compose up
 
 stop:
 	docker-compose down
