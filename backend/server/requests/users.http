@@ -1,5 +1,5 @@
 GET http://localhost:3000/api/v1/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZmlyc3ROYW1lIjoiZmlyc3RuYW1lVEVTVCIsImlhdCI6MTY1NzExNzA0MiwiZXhwIjoxNjg4Njc0NjQyfQ.HKUtzrqx8xgKvDVgrW3KPShrCdnc4ZKGg-IkBUdwQrU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoiZmlyc3RuYW1lVEVTVCIsImlhdCI6MTY1NzExODUxMSwiZXhwIjoxNjg4Njc2MTExfQ.DC-fKNSKFdMrEs0CcagWdX0jE5B5_FJfdw5tMwGP0-w
 
 ###
 GET http://localhost:3000/api/v1/users/5
@@ -17,6 +17,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZmlyc3ROY
 }
 
 ###
-DELETE http://localhost:3000/api/v1/users/7
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZmlyc3ROYW1lIjoiZmlyc3RuYW1lVEVTVCIsImlhdCI6MTY1NzExNzA0MiwiZXhwIjoxNjg4Njc0NjQyfQ.HKUtzrqx8xgKvDVgrW3KPShrCdnc4ZKGg-IkBUdwQrU
+DELETE http://localhost:3000/api/v1/users/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoiZmlyc3RuYW1lVEVTVCIsImlhdCI6MTY1NzExODUxMSwiZXhwIjoxNjg4Njc2MTExfQ.DC-fKNSKFdMrEs0CcagWdX0jE5B5_FJfdw5tMwGP0-w
 

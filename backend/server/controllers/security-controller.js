@@ -2,7 +2,7 @@ const User = require("../models/postgres/User");
 const { ValidationError } = require("sequelize");
 const { formatError } = require("../utils/formatError");
 const bcryptjs = require("bcryptjs");
-const { createToken } = require("../lib/tokenManager.js");
+const { createToken } = require("../lib/token-manager.js");
 
 exports.register = async (req, res) => {
 	try {
