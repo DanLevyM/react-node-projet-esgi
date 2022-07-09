@@ -2,15 +2,15 @@
 const express = require("express");
 const morgan = require("morgan");
 
-const errorHandler = require("./middlewares/error");
-const UserRouter = require("./routes/users-router");
-const SecurityRouter = require("./routes/security-router");
-const AdminRouter = require("./routes/admin-router");
+const errorHandler = require("./server/middlewares/error");
+const UserRouter = require("./server/routes/users-router");
+const SecurityRouter = require("./server/routes/security-router");
+const AdminRouter = require("./server/routes/admin-router");
 
 const app = express();
 app.use(express.json());
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.SERVER_PORT || 3000;
 
 if (process.env.NODE_ENV === "development") {
 	app.use(morgan("dev"));

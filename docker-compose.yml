@@ -1,0 +1,68 @@
+version: "3.6"
+
+services:
+  server:
+    image: node:alpine
+    volumes:
+      - ./backend:/usr/local/backend
+    working_dir: /usr/local/backend
+    env_file: .env
+    environment:
+      - MONGO_URL=mongodb://root:password@mongo:27017/app?authSource=admin
+      - JWT_SECRET=mySecret
+      - NODE_ENV=development
+    ports:
+      - 127.0.0.1:3000:3000
+    command: npm start
+    container_name: server_c
+
+  db:
+    image: postgres:14.4-alpine
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: $POSTGRES_DB
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+    container_name: pg_c
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=$PGADMIN_DEFAULT_EMAIL
+      - PGADMIN_DEFAULT_PASSWORD=$PGADMIN_DEFAULT_PASSWORD
+    ports:
+      - "5050:80"
+    restart: always
+    volumes:
+      - pgadmin:/root/.pgadmin
+    container_name: pga_c
+
+  # mongo:
+  #   image: mongo
+  #   ports:
+  #     - 27017:27017
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: password
+  #   volumes:
+  #     - ./SampleCollections:/usr/local/sampleCollections
+  #     - mongo-data:/data/db
+  #   working_dir: /usr/local/sampleCollections
+  #   container_name: mongo_c
+
+  # client:
+  #   image: node:alpine
+  #   volumes:
+  #     - ./client:/usr/local/server
+  #   working_dir: /usr/local/server
+  #   environment:
+  #     - REACT_API_URL=http://server:3000
+  #   ports:
+  #     - 127.0.0.1:3001:3000
+  #   command: npm start
+
+volumes:
+  mongo-data: {}
+  db-data: {}
+  pgadmin: {}
