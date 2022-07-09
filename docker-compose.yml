@@ -2,18 +2,14 @@ version: "3.6"
 
 services:
   server:
-    image: node:alpine
+    image: node:16.16.0-alpine
     volumes:
       - ./backend:/usr/local/backend
     working_dir: /usr/local/backend
     env_file: .env
-    environment:
-      - MONGO_URL=mongodb://root:password@mongo:27017/app?authSource=admin
-      - JWT_SECRET=mySecret
-      - NODE_ENV=development
     ports:
       - 127.0.0.1:3000:3000
-    command: npm start
+    command: npm run dev
     container_name: server_c
 
   db:
