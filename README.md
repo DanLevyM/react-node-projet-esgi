@@ -9,4 +9,4 @@
 
 i.e:
 `docker exec server_c npm install`
-`docker exec server_c npm install express`
+`docker exec server_c npm install express...`
