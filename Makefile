@@ -1,7 +1,4 @@
-.PHONY: build start stop restart restartvol migrate
-
-build:
-	docker-compose up && docker exec server_c npm run migrate
+.PHONY: start stop restart restartvol migrate
 
 start:
 	docker-compose up
