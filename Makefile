@@ -1,4 +1,4 @@
-.PHONY: start stop restart restartvol migrate
+.PHONY: start stop restart restartvol migrate seeders seedersundo
 
 start:
 	docker-compose up
@@ -14,3 +14,11 @@ restartvol:
 # SERVER
 migrate:
 	docker exec server_c npm run migrate
+
+
+# SEEDERS
+seeders:
+	docker exec server_c npx sequelize-cli db:seed:all
+
+seedersundo:
+	docker exec server_c npx sequelize-cli db:seed:undo
