@@ -13,7 +13,7 @@ module.exports = async (req, res, next) => {
 	}
 
 	const tokenInDb = await User.findOne({ where: { token: token } });
-	if (!tokenInDb) return res.status(403).json({ error: "Not found" });
+	if (!tokenInDb) return res.status(403).json({ error: "Token not found" });
 
 	try {
 		const decoded = await verifyToken(token);
