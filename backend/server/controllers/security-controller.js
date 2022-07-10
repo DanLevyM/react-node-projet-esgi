@@ -6,6 +6,7 @@ const { createToken } = require("../lib/token-manager.js");
 
 exports.register = async (req, res) => {
 	try {
+		console.log(req.body);
 		const result = await User.create(req.body);
 		console.log("USER CREATED ====================================", result);
 		res.status(201).json(result);
@@ -22,28 +23,28 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
 	try {
-		console.log(req.body.email);
 		const result = await User.findOne({
 			where: { email: req.body.email },
 		});
+
 		console.log("result ==============================", result);
 		if (
 			result &&
 			(await bcryptjs.compare(req.body.password, result.password))
 		) {
-			res.json({
-				token: await createToken(result),
-			});
+			const token = await createToken(result);
+			await result.update({ token });
+			res.json({ token });
 		} else {
 			res.sendStatus(401);
 		}
 	} catch (error) {
+		console.error(error);
+
 		if (error instanceof ValidationError) {
-			console.error(error);
 			res.status(422).json(formatError(error));
 		} else {
 			res.sendStatus(500);
-			console.error(error);
 		}
 	}
 };
