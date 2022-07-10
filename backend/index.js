@@ -3,6 +3,7 @@ const express = require("express");
 const morgan = require("morgan");
 
 const errorHandler = require("./server/middlewares/error");
+
 const UserRouter = require("./server/routes/users-router");
 const SecurityRouter = require("./server/routes/security-router");
 const AdminRouter = require("./server/routes/admin-router");

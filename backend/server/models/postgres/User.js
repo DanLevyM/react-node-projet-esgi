@@ -51,6 +51,10 @@ User.init(
 			type: DataTypes.ENUM("admin", "user"),
 			defaultValue: "user",
 		},
+		token: {
+			type: DataTypes.STRING,
+			allowNull: true,
+		},
 	},
 	{
 		sequelize: connection,

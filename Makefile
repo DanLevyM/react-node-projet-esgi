@@ -6,11 +6,10 @@ start:
 stop:
 	docker-compose down
 
-restart:
-	docker-compose down && docker-compose up
+restart: stop start
 
 restartvol:
-	docker-compose down --volumes
+	docker-compose down --remove-orphans --volumes --timeout 0
 
 # SERVER
 migrate:

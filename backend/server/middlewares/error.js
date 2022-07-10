@@ -4,8 +4,7 @@ const { formatError } = require("../utils/formatError");
 const errorHandler = (err, req, res, next) => {
 	let error = { ...err };
 
-	console.error(err);
-	console.log("ERROR HANDLER =============", err.message);
+	console.log("ERROR HANDLER =============", err);
 
 	if (err.name === "SequelizeValidationError") {
 		// add log for err.message
