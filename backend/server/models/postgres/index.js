@@ -1,5 +1,6 @@
-exports.connection = require("./db");
-exports.User = require("./User");
+exports.connection = require('./db');
+exports.User = require('./User');
+
 // exports.Article = require("./Article");
 // const { ArticleMongo, Article } = require("../mongo");
 // const User = require("./User");

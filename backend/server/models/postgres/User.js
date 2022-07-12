@@ -1,6 +1,6 @@
-const { Model, DataTypes } = require("sequelize");
-const connection = require("./db");
-const bcryptjs = require("bcryptjs");
+const { Model, DataTypes } = require('sequelize');
+const connection = require('./db');
+const bcryptjs = require('bcryptjs');
 
 class User extends Model {}
 
@@ -48,8 +48,8 @@ User.init(
 			},
 		},
 		role: {
-			type: DataTypes.ENUM("admin", "user"),
-			defaultValue: "user",
+			type: DataTypes.ENUM('admin', 'user'),
+			defaultValue: 'user',
 		},
 		token: {
 			type: DataTypes.STRING,
@@ -62,7 +62,7 @@ User.init(
 	},
 	{
 		sequelize: connection,
-		modelName: "user",
+		modelName: 'user',
 	}
 );
 
@@ -73,9 +73,9 @@ const hashPassword = async (user) => {
 	);
 };
 
-User.addHook("beforeCreate", hashPassword);
-User.addHook("beforeUpdate", async (user, { fields }) => {
-	if (fields.includes("password")) {
+User.addHook('beforeCreate', hashPassword);
+User.addHook('beforeUpdate', async (user, { fields }) => {
+	if (fields.includes('password')) {
 		await hashPassword(user);
 	}
 });
