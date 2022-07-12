@@ -15,7 +15,6 @@ restartvol:
 migrate:
 	docker exec server_c npm run migrate
 
-
 # SEEDERS
 seeders:
 	docker exec server_c npx sequelize-cli db:seed:all
