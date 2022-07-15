@@ -1,12 +1,12 @@
 /* eslint-disable no-undef */
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
 exports.createToken = async (user) => {
 	const token = await jwt.sign(
 		{ id: user.id, firstName: user.firstName, role: user.role },
 		process.env.JWT_SECRET,
 		{
-			expiresIn: "1y",
+			expiresIn: '1y',
 		}
 	);
 

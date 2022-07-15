@@ -1,5 +1,17 @@
 exports.connection = require('./db');
 exports.User = require('./User');
+exports.UsersFriends = require('./UsersFriends');
+
+exports.User.belongsToMany(exports.User, {
+	as: 'user_low',
+	foreignKey: 'user_low',
+	through: exports.UsersFriends,
+});
+exports.User.belongsToMany(exports.User, {
+	as: 'user_high',
+	foreignKey: 'user_high',
+	through: exports.UsersFriends,
+});
 
 // exports.Article = require("./Article");
 // const { ArticleMongo, Article } = require("../mongo");

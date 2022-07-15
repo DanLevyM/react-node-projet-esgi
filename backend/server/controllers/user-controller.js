@@ -1,7 +1,10 @@
-const User = require("../models/postgres/User");
-const { ValidationError } = require("sequelize");
-const { formatError } = require("../utils/formatError");
-const { getRandomString } = require("../utils/getRandomString");
+const User = require('../models/postgres/User');
+const UsersFriends = require('../models/postgres/UsersFriends');
+const { ValidationError } = require('sequelize');
+const { formatError } = require('../utils/formatError');
+const { getRandomString } = require('../utils/getRandomString');
+const { asyncHandler } = require('../middlewares/async');
+
 // @desc    Get all users
 // @path    GET /api/v1/users
 // @access  Private
@@ -46,7 +49,7 @@ exports.deleteMe = async (req, res) => {
 			{
 				email: `${getRandomString()}@gmail.com`,
 				password: getRandomString(),
-				firstName: "Deleted",
+				firstName: 'Deleted',
 				lastName: null,
 				token: null,
 				isActive: false,
@@ -85,7 +88,7 @@ exports.updateMe = async (req, res) => {
 		return res.sendStatus(403);
 	}
 	try {
-		const [nbRowsUpdated, rows] = await User.update(req.body, {
+		const [, rows] = await User.update(req.body, {
 			where: { id: parseInt(req.params.id, 10) },
 			returning: true,
 			individualHooks: true,
@@ -118,3 +121,9 @@ exports.getMe = async (req, res) => {
 		console.error(error);
 	}
 };
+
+// FRIENDS
+exports.addFriend = asyncHandler(async (req, res) => {
+	const result = await UsersFriends.create(req.body);
+	res.json(result);
+});

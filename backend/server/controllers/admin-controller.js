@@ -1,8 +1,8 @@
-const { User } = require("../models/postgres");
-const { asyncHandler } = require("../middlewares/async");
+const { User } = require('../models/postgres');
+const { asyncHandler } = require('../middlewares/async');
 
-const { getRandomString } = require("../utils/getRandomString");
-const ErrorResponse = require("../utils/errorResponse");
+const { getRandomString } = require('../utils/getRandomString');
+const ErrorResponse = require('../utils/errorResponse');
 
 // @desc    Add user
 // @path    POST /api/v1/admin/adduser
@@ -18,7 +18,7 @@ exports.addUser = asyncHandler(async (req, res) => {
 exports.deleteUser = asyncHandler(async (req, res, next) => {
 	if (req.user.id === parseInt(req.params.id, 10)) {
 		return next(
-			new ErrorResponse("Admins can not delete their account themselves.", 403)
+			new ErrorResponse('Admins can not delete their account themselves.', 403)
 		);
 	}
 
@@ -27,7 +27,7 @@ exports.deleteUser = asyncHandler(async (req, res, next) => {
 		{
 			email: `${getRandomString()}@gmail.com`,
 			password: getRandomString(),
-			firstName: "Deleted",
+			firstName: 'Deleted',
 			lastName: null,
 			token: null,
 			isActive: false,

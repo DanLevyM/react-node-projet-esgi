@@ -1,5 +1,5 @@
-const { verifyToken } = require("../lib/token-manager.js");
-const User = require("../models/postgres/User");
+const { verifyToken } = require('../lib/token-manager.js');
+const User = require('../models/postgres/User');
 
 module.exports = async (req, res, next) => {
 	const auth = req.headers.authorization;
@@ -7,13 +7,13 @@ module.exports = async (req, res, next) => {
 		return res.sendStatus(401);
 	}
 	console.log(auth);
-	const [type, token] = auth.split(" ");
-	if (type !== "Bearer") {
+	const [type, token] = auth.split(' ');
+	if (type !== 'Bearer') {
 		return res.sendStatus(401);
 	}
 
 	const tokenInDb = await User.findOne({ where: { token: token } });
-	if (!tokenInDb) return res.status(403).json({ error: "Token not found" });
+	if (!tokenInDb) return res.status(403).json({ error: 'Token not found' });
 
 	try {
 		const decoded = await verifyToken(token);

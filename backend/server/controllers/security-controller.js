@@ -1,13 +1,13 @@
-const User = require("../models/postgres/User");
-const { ValidationError } = require("sequelize");
-const { formatError } = require("../utils/formatError");
-const bcryptjs = require("bcryptjs");
-const { createToken } = require("../lib/token-manager.js");
+const User = require('../models/postgres/User');
+const { ValidationError } = require('sequelize');
+const { formatError } = require('../utils/formatError');
+const bcryptjs = require('bcryptjs');
+const { createToken } = require('../lib/token-manager.js');
 
 exports.register = async (req, res) => {
 	try {
 		const result = await User.create(req.body);
-		console.log("USER CREATED ====================================", result);
+		console.log('USER CREATED ====================================', result);
 		res.status(201).json(result);
 	} catch (error) {
 		console.error(error);
@@ -25,7 +25,7 @@ exports.login = async (req, res) => {
 			where: { email: req.body.email },
 		});
 
-		console.log("result ==============================", result);
+		console.log('result ==============================', result);
 		if (
 			result &&
 			(await bcryptjs.compare(req.body.password, result.password))
