@@ -6,7 +6,7 @@ const {
 	deleteMe,
 	updateMe,
 	getMe,
-	addFriend,
+	sendFriendRequest,
 } = require('../controllers/user-controller');
 
 const router = new Router();
@@ -20,6 +20,6 @@ router
 	.put(checkAuthentication, updateMe)
 	.delete(checkAuthentication, deleteMe);
 
-router.route('/addfriend').post(addFriend);
+router.route('/addfriend').post(sendFriendRequest);
 
 module.exports = router;

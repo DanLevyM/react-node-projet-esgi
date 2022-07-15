@@ -1,6 +1,7 @@
 const User = require('../models/postgres/User');
 const UsersFriends = require('../models/postgres/UsersFriends');
 const { ValidationError } = require('sequelize');
+// const ErrorResponse = require('../utils/errorResponse');
 const { formatError } = require('../utils/formatError');
 const { getRandomString } = require('../utils/getRandomString');
 const { asyncHandler } = require('../middlewares/async');
@@ -122,8 +123,44 @@ exports.getMe = async (req, res) => {
 	}
 };
 
+const handleNewFriendRequest = ({ user_low, user_high }, res) => {
+	if (user_low < user_high) {
+		return {
+			user_low: user_low,
+			user_high: user_high,
+			status: 'user_low_pending_request',
+		};
+	} else if (user_low > user_high) {
+		return {
+			user_low: user_high,
+			user_high: user_low,
+			status: 'user_high_pending_request',
+		};
+	} else {
+		res.json({ message: 'Same id for sender and receiver !' }, 422);
+		// throw new ErrorResponse('qwe', 423);
+	}
+};
+
 // FRIENDS
-exports.addFriend = asyncHandler(async (req, res) => {
-	const result = await UsersFriends.create(req.body);
-	res.json(result);
+
+// @desc    send friend request
+// @path    POST /api/v1/users/addfriend
+// @access  Private
+exports.sendFriendRequest = asyncHandler(async (req, res) => {
+	if (
+		!(await User.findByPk(req.body.user_low)) ||
+		!(await User.findByPk(req.body.user_high))
+	)
+		res.json({ message: 'User does not exists' }, 422);
+
+	const datas = handleNewFriendRequest(req.body, res);
+	const relationAlreadyExists = await UsersFriends.findOne({
+		where: { user_low: datas.user_low, user_high: datas.user_high },
+	});
+	if (relationAlreadyExists)
+		res.json({ message: 'Relation already exists' }, 422);
+
+	const result = await UsersFriends.create(datas);
+	if (result) res.json(result, 201);
 });
