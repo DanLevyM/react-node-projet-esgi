@@ -8,7 +8,7 @@ const expressListRoutes = require('express-list-routes');
 const UserRouter = require('./server/routes/users-router');
 const SecurityRouter = require('./server/routes/security-router');
 const AdminRouter = require('./server/routes/admin-router');
-const RelationssRouter = require('./server/routes/friends-router');
+const RelationsRouter = require('./server/routes/friends-router');
 
 const app = express();
 app.use(express.json());
@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === 'development') {
 	app.use(morgan('dev'));
 }
 
-app.use('/api/v1/friends', RelationssRouter);
+app.use('/api/v1/friends', RelationsRouter);
 app.use('/api/v1/users', UserRouter);
 app.use('/api/v1/auth', SecurityRouter);
 app.use('/api/v1/admin', AdminRouter);

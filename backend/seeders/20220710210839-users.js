@@ -1,12 +1,16 @@
 'use strict';
+const bcryptjs = require('bcryptjs');
 
+const hashPassword = async (pwd) => {
+	return await bcryptjs.hash(pwd, await bcryptjs.genSalt(10));
+};
 module.exports = {
-	up: (queryInterface) => {
+	up: async (queryInterface) => {
 		return queryInterface.bulkInsert('users', [
 			{
 				firstName: 'admin',
 				lastName: 'admin',
-				password: '121212',
+				password: await hashPassword('121212'),
 				email: 'admin@gmail.com',
 				createdAt: new Date(),
 				updatedAt: new Date(),
@@ -15,7 +19,7 @@ module.exports = {
 			{
 				firstName: 'admin',
 				lastName: 'admin',
-				password: '121212',
+				password: await hashPassword('121212'),
 				email: 'admin2@gmail.com',
 				createdAt: new Date(),
 				updatedAt: new Date(),
@@ -24,7 +28,7 @@ module.exports = {
 			{
 				firstName: 'John',
 				lastName: 'Doe',
-				password: '121212',
+				password: await hashPassword('121212'),
 				email: 'johndoe@gmail.com',
 				createdAt: new Date(),
 				updatedAt: new Date(),
@@ -32,8 +36,120 @@ module.exports = {
 			{
 				firstName: 'Paul',
 				lastName: 'Hack',
-				password: '121212',
+				password: await hashPassword('121212'),
 				email: 'paulhack@gmail.com',
+				createdAt: new Date(),
+				updatedAt: new Date(),
+			},
+			{
+				firstName: 'user1',
+				lastName: 'Hack',
+				password: await hashPassword('121212'),
+				email: 'user1@gmail.com',
+				createdAt: new Date(),
+				updatedAt: new Date(),
+			},
+			{
+				firstName: 'user2',
+				lastName: 'Hack',
+				password: await hashPassword('121212'),
+				email: 'user2@gmail.com',
+				createdAt: new Date(),
+				updatedAt: new Date(),
+			},
+			{
+				firstName: 'user3',
+				lastName: 'Hack',
+				password: await hashPassword('121212'),
+				email: 'user3@gmail.com',
+				createdAt: new Date(),
+				updatedAt: new Date(),
+			},
+			{
+				firstName: 'user4',
+				lastName: 'Hack',
+				password: await hashPassword('121212'),
+				email: 'user4@gmail.com',
+				createdAt: new Date(),
+				updatedAt: new Date(),
+			},
+			{
+				firstName: 'user5',
+				lastName: 'Hack',
+				password: await hashPassword('121212'),
+				email: 'user5@gmail.com',
+				createdAt: new Date(),
+				updatedAt: new Date(),
+			},
+			{
+				firstName: 'user6',
+				lastName: 'Hack',
+				password: await hashPassword('121212'),
+				email: 'user6@gmail.com',
+				createdAt: new Date(),
+				updatedAt: new Date(),
+			},
+			{
+				firstName: 'user7',
+				lastName: 'Hack',
+				password: await hashPassword('121212'),
+				email: 'user7@gmail.com',
+				createdAt: new Date(),
+				updatedAt: new Date(),
+			},
+			{
+				firstName: 'user8',
+				lastName: 'Hack',
+				password: await hashPassword('121212'),
+				email: 'user8@gmail.com',
+				createdAt: new Date(),
+				updatedAt: new Date(),
+			},
+			{
+				firstName: 'user9',
+				lastName: 'Hack',
+				password: await hashPassword('121212'),
+				email: 'user9@gmail.com',
+				createdAt: new Date(),
+				updatedAt: new Date(),
+			},
+			{
+				firstName: 'user10',
+				lastName: 'Hack',
+				password: await hashPassword('121212'),
+				email: 'user10@gmail.com',
+				createdAt: new Date(),
+				updatedAt: new Date(),
+			},
+			{
+				firstName: 'user11',
+				lastName: 'Hack',
+				password: await hashPassword('121212'),
+				email: 'user110@gmail.com',
+				createdAt: new Date(),
+				updatedAt: new Date(),
+			},
+			{
+				firstName: 'user12',
+				lastName: 'Hack',
+				password: await hashPassword('121212'),
+				email: 'user120@gmail.com',
+				createdAt: new Date(),
+				updatedAt: new Date(),
+			},
+			{
+				firstName: 'user13',
+				lastName: 'Hack',
+				password: await hashPassword('121212'),
+				email: 'user130@gmail.com',
+				createdAt: new Date(),
+				updatedAt: new Date(),
+			},
+			{
+				firstName: 'user14',
+				lastName: 'Hack',
+				password: await hashPassword('121212'),
+				email: 'user140@gmail.com',
 				createdAt: new Date(),
 				updatedAt: new Date(),
 			},

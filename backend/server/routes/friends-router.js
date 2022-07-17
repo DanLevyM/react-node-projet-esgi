@@ -5,7 +5,7 @@ const {
 	showFriendsList,
 	showPendingFriendsList,
 	showBlockedUsers,
-} = require('../controllers/friends-controller');
+} = require('../controllers/relations-controller');
 
 const router = new Router();
 

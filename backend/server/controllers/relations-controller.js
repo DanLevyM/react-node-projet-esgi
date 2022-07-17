@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const { Op } = require('sequelize');
 const UsersRelations = require('../models/postgres/UsersRelations');
 const { asyncHandler } = require('../middlewares/async');
@@ -6,7 +7,6 @@ const User = require('../models/postgres/User');
 
 // @path    GET /api/v1/users/show/:id
 // @access  Private
-// eslint-disable-next-line no-unused-vars
 exports.showFriendsList = asyncHandler(async (req, res, next) => {
 	// User does not exist
 	if ((await User.findOne({ where: { id: req.params.id } })) === null) {
@@ -17,7 +17,7 @@ exports.showFriendsList = asyncHandler(async (req, res, next) => {
 	const relations = await getUserRelations(req.params.id);
 
 	if (relations.length === 0) {
-		res.json({ friends: ['aa'] });
+		res.json({ friends: [] });
 		return;
 	}
 
