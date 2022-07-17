@@ -1,16 +1,16 @@
 exports.connection = require('./db');
 exports.User = require('./User');
-exports.UsersFriends = require('./UsersFriends');
+exports.UsersRelations = require('./UsersRelations');
 
 exports.User.belongsToMany(exports.User, {
 	as: 'user_low',
 	foreignKey: 'user_low',
-	through: exports.UsersFriends,
+	through: exports.UsersRelations,
 });
 exports.User.belongsToMany(exports.User, {
 	as: 'user_high',
 	foreignKey: 'user_high',
-	through: exports.UsersFriends,
+	through: exports.UsersRelations,
 });
 
 // exports.Article = require("./Article");

@@ -2,9 +2,9 @@ const { Model, DataTypes } = require('sequelize');
 const connection = require('./db');
 const ErrorResponse = require('../../utils/errorResponse');
 
-class UsersFriends extends Model {}
+class UsersRelations extends Model {}
 
-UsersFriends.init(
+UsersRelations.init(
 	{
 		user_low: {
 			type: DataTypes.INTEGER,
@@ -36,21 +36,21 @@ UsersFriends.init(
 	},
 	{
 		sequelize: connection,
-		modelName: 'usersfriends',
+		modelName: 'usersrelations',
 	}
 );
 
 // To have a proper table and a clear friends status, we add users with lower id in
 // column 1 and higher id in column 2
-const checkUsersFriendsDatas = async (usersFriends) => {
-	if (usersFriends.user_low === usersFriends.user_high)
+const checkUsersRelationsDatas = async (usersRelations) => {
+	if (usersRelations.user_low === usersRelations.user_high)
 		throw new ErrorResponse('Same id for sender and receiver', 422);
 
-	if (usersFriends.user_low > usersFriends.user_high)
+	if (usersRelations.user_low > usersRelations.user_high)
 		throw new ErrorResponse('Internal friend request error', 422);
 };
 
-UsersFriends.addHook('beforeCreate', checkUsersFriendsDatas);
-UsersFriends.addHook('beforeUpdate', checkUsersFriendsDatas);
+UsersRelations.addHook('beforeCreate', checkUsersRelationsDatas);
+UsersRelations.addHook('beforeUpdate', checkUsersRelationsDatas);
 
-module.exports = UsersFriends;
+module.exports = UsersRelations;
