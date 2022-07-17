@@ -9,16 +9,17 @@ const errorHandler = (err, req, res, next) => {
 	if (err.name === 'SequelizeValidationError') {
 		// add log for err.message
 		const msg = JSON.stringify(formatError(err));
-		error = new ErrorResponse(msg, 422);
+		error = new ErrorResponse(msg, err.statusCode);
 	}
 
 	if (err.name === 'SequelizeUniqueConstraintError')
-		error = new ErrorResponse('Unique constraint Error', 422);
+		error = new ErrorResponse('Unique constraint Error', err.statusCode);
 
 	if (err.name === 'SequelizeDatabaseError')
-		error = new ErrorResponse('Database error', 422);
+		error = new ErrorResponse('Database error', err.statusCode);
 
-	if (err.name === 'Error') error = new ErrorResponse(err.message, 422);
+	if (err.name === 'Error')
+		error = new ErrorResponse(err.message, err.statusCode);
 
 	res
 		.status(error.statusCode || 500)

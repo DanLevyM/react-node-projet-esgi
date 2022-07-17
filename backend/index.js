@@ -1,14 +1,14 @@
 /* eslint-disable no-undef */
 const express = require('express');
 const morgan = require('morgan');
+const expressListRoutes = require('express-list-routes');
 
 const errorHandler = require('./server/middlewares/error');
-const expressListRoutes = require('express-list-routes');
 
 const UserRouter = require('./server/routes/users-router');
 const SecurityRouter = require('./server/routes/security-router');
 const AdminRouter = require('./server/routes/admin-router');
-const RelationsRouter = require('./server/routes/friends-router');
+const RelationsRouter = require('./server/routes/relations-router');
 
 const app = express();
 app.use(express.json());
@@ -29,4 +29,6 @@ app.use(errorHandler);
 app.listen(PORT, () => {
 	console.log(`Server running on port ${PORT}`);
 });
-console.log(expressListRoutes(app));
+
+// Uncomment to check routes
+// expressListRoutes(app);

@@ -4,22 +4,18 @@ const UsersRelations = require('../models/postgres/UsersRelations');
 const { asyncHandler } = require('../middlewares/async');
 const ErrorResponse = require('../utils/errorResponse');
 const User = require('../models/postgres/User');
+const e = require('express');
 
 // @path    GET /api/v1/users/show/:id
 // @access  Private
 exports.showFriendsList = asyncHandler(async (req, res, next) => {
 	// User does not exist
-	if ((await User.findOne({ where: { id: req.params.id } })) === null) {
-		res.json({ error: 'User error !' });
-		return;
-	}
+	if ((await User.findOne({ where: { id: req.params.id } })) === null)
+		return res.json({ error: 'User error !' }, 400);
 
 	const relations = await getUserRelations(req.params.id);
 
-	if (relations.length === 0) {
-		res.json({ friends: [] });
-		return;
-	}
+	if (relations.length === 0) return res.json({ friends: ['asd'] }, 200);
 
 	const friendsToParse = getSpecificUserRelation('friends', relations);
 
@@ -47,17 +43,19 @@ exports.showFriendsList = asyncHandler(async (req, res, next) => {
 // @path    POST /api/v1/friends/add
 // @access  Private
 // @body		{ user_low: int, user_high: int }
+// TO DO CHANGE USER_LOW TO SENDER
 exports.sendFriendRequest = asyncHandler(async (req, res, next) => {
-	if (req.user.id !== req.body.user_low && req.user.id !== req.body.user_high)
-		return next(new ErrorResponse('You cannot do that.', 403));
+	if (req.user.id === parseInt(req.body.id_receiver))
+		return next(new ErrorResponse('Same ids.', 422));
 
-	if (
-		!(await User.findByPk(req.body.user_low)) ||
-		!(await User.findByPk(req.body.user_high))
-	)
+	if (!(await User.findByPk(req.body.id_receiver)))
 		return next(new ErrorResponse('User does not exist.', 422));
 
-	const datas = handleNewFriendRequest(req.body, res);
+	const datas = orderUsersIds({
+		user_low: req.user.id,
+		user_high: req.body.id_receiver,
+	});
+
 	const relationAlreadyExists = await UsersRelations.findOne({
 		where: { user_low: datas.user_low, user_high: datas.user_high },
 	});
@@ -131,12 +129,64 @@ exports.showBlockedUsers = asyncHandler(async (req, res, next) => {
 	res.json({ users_blocked: blockedUsers });
 });
 
-// exports.answerFriendsRequest = asyncHandler(async (req, res, next) => {});
+// @path    POST /api/v1/friends/request-answer
+// @access  Private
+// @body		{ id: int, answer: string }
+exports.answerFriendsRequest = asyncHandler(async (req, res, next) => {
+	if (req.user.id === parseInt(req.body.id_requester))
+		return next(new ErrorResponse('Same ids!', 422));
+
+	if (!parseInt(req.body.id_requester) || !req.body.answer)
+		return next(new ErrorResponse('Request cannot be processed.', 422));
+
+	if (req.body.answer !== 'accept' && req.body.answer !== 'decline')
+		return next(new ErrorResponse('#WRA.', 422)); // Wrong Response Answer
+
+	const transmitterUser = await User.findOne({
+		where: { id: req.body.id_requester },
+	});
+	if (!transmitterUser) return next(new ErrorResponse('#NO', 422)); // No User
+
+	console.log('transmitter', transmitterUser);
+
+	const usersRelation = await UsersRelations.findOne({
+		where: {
+			[Op.or]: [
+				{
+					[Op.and]: [
+						{ user_low: req.user.id },
+						{ user_high: req.body.id_requester },
+						{ status: 'user_high_pending_request' },
+					],
+				},
+				{
+					[Op.and]: [
+						{ user_low: req.body.id_requester },
+						{ user_high: req.user.id },
+						{ status: 'user_low_pending_request' },
+					],
+				},
+			],
+		},
+	});
+
+	if (!usersRelation) return next(new ErrorResponse('#NFRF', 422)); // No Friend Request Found
+
+	if (req.body.answer === 'accept') {
+		usersRelation.update({ status: 'friends' });
+		res.json({});
+	} else if (req.body.answer === 'decline') {
+		usersRelation.destroy();
+		res.status(203).json({});
+	} else {
+		return next(new ErrorResponse('Unknown error', 412));
+	}
+});
 
 // ------------------------------------------------------------
 // ------------------------- UTILS ----------------------------
 // ------------------------------------------------------------
-const handleNewFriendRequest = ({ user_low, user_high }, res) => {
+const orderUsersIds = ({ user_low, user_high }) => {
 	if (user_low < user_high) {
 		return {
 			user_low: user_low,
@@ -149,9 +199,8 @@ const handleNewFriendRequest = ({ user_low, user_high }, res) => {
 			user_high: user_low,
 			status: 'user_high_pending_request',
 		};
-	} else {
-		res.json({ message: 'Same id for sender and receiver !' }, 422);
 	}
+	return null;
 };
 
 const getUserRelations = async (id) => {
