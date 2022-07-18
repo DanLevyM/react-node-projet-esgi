@@ -8,9 +8,21 @@ services:
     working_dir: /usr/local/backend
     env_file: .env
     ports:
-      - '127.0.0.1:3000:3000'
+      - '127.0.0.1:3001:3001'
     command: npm run dev
     container_name: server_c
+
+  client:
+    image: node:16.16.0-alpine
+    volumes:
+      - ./frontend:/usr/local/client
+    working_dir: /usr/local/client
+    # environment:
+    #   - REACT_API_URL=http://server:3000
+    ports:
+      - 127.0.0.1:3000:3000
+    command: npm start
+    container_name: client_c
 
   db:
     image: postgres:14.4-alpine
@@ -24,17 +36,17 @@ services:
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
     container_name: pg_c
 
-  pgadmin:
-    image: dpage/pgadmin4
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=$PGADMIN_DEFAULT_EMAIL
-      - PGADMIN_DEFAULT_PASSWORD=$PGADMIN_DEFAULT_PASSWORD
-    ports:
-      - '5050:80'
-    restart: always
-    volumes:
-      - pgadmin:/root/.pgadmin
-    container_name: pga_c
+  # pgadmin:
+  #   image: dpage/pgadmin4
+  #   environment:
+  #     - PGADMIN_DEFAULT_EMAIL=$PGADMIN_DEFAULT_EMAIL
+  #     - PGADMIN_DEFAULT_PASSWORD=$PGADMIN_DEFAULT_PASSWORD
+  #   ports:
+  #     - '5050:80'
+  #   restart: always
+  #   volumes:
+  #     - pgadmin:/root/.pgadmin
+  #   container_name: pga_c
 
 volumes:
   mongo-data: {}
@@ -53,14 +65,3 @@ volumes:
   #     - mongo-data:/data/db
   #   working_dir: /usr/local/sampleCollections
   #   container_name: mongo_c
-
-  # client:
-  #   image: node:alpine
-  #   volumes:
-  #     - ./client:/usr/local/server
-  #   working_dir: /usr/local/server
-  #   environment:
-  #     - REACT_API_URL=http://server:3000
-  #   ports:
-  #     - 127.0.0.1:3001:3000
-  #   command: npm start

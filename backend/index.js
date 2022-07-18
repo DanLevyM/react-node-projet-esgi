@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 const express = require('express');
 const morgan = require('morgan');
-const expressListRoutes = require('express-list-routes');
 
 const errorHandler = require('./server/middlewares/error');
 
@@ -31,4 +30,5 @@ app.listen(PORT, () => {
 });
 
 // Uncomment to check routes
-// expressListRoutes(app);
+const expressListRoutes = require('express-list-routes');
+expressListRoutes(app);

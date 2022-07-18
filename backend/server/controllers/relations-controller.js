@@ -258,7 +258,7 @@ exports.unblockUser = asyncHandler(async (req, res, next) => {
 
 	if (usersRelationExists) {
 		usersRelationExists.destroy();
-		return res.json({}, 203);
+		return res.json({}, 204);
 	}
 	return next(new ErrorResponse('#NR', 422)); // No Relation
 });
