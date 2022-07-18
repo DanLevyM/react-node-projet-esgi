@@ -1,6 +1,7 @@
 exports.connection = require('./db');
 exports.User = require('./User');
 exports.UsersRelations = require('./UsersRelations');
+exports.Report = require('./Report');
 
 exports.User.belongsToMany(exports.User, {
 	as: 'user_low',
@@ -11,6 +12,16 @@ exports.User.belongsToMany(exports.User, {
 	as: 'user_high',
 	foreignKey: 'user_high',
 	through: exports.UsersRelations,
+});
+exports.User.belongsToMany(exports.User, {
+	as: 'user_id',
+	foreignKey: 'user_id',
+	through: exports.Report,
+});
+exports.User.belongsToMany(exports.User, {
+	as: 'user_id_reported',
+	foreignKey: 'user_id_reported',
+	through: exports.Report,
 });
 
 // exports.Article = require("./Article");
