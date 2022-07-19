@@ -55,10 +55,11 @@ User.init(
 			type: DataTypes.STRING,
 			allowNull: true,
 		},
-		isActive: {
-			type: DataTypes.BOOLEAN,
-			defaultValue: true,
-		}
+		technologies: {
+			type: DataTypes.STRING,
+			allowNull: true,
+			required: false,
+		},
 	},
 	{
 		sequelize: connection,

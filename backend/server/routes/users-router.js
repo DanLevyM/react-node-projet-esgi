@@ -12,12 +12,12 @@ const router = new Router();
 
 router.route('/');
 router.route('/').get(checkAuthentication, getUsers);
-router.route('/me').get(checkAuthentication, getMe);
-
 router
-	.route('/:id')
-	.get(checkAuthentication, getUser)
-	.put(checkAuthentication, updateMe)
-	.delete(checkAuthentication, deleteMe);
+	.route('/me')
+	.get(checkAuthentication, getMe)
+	.delete(checkAuthentication, deleteMe)
+	.put(checkAuthentication, updateMe);
+
+router.route('/:id').get(checkAuthentication, getUser);
 
 module.exports = router;

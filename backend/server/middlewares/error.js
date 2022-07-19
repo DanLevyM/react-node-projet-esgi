@@ -4,7 +4,7 @@ const { formatError } = require('../utils/formatError');
 // eslint-disable-next-line no-unused-vars
 const errorHandler = (err, req, res, next) => {
 	let error = { ...err };
-	console.log(err.stack.red);
+	console.log(err.stack);
 
 	// ---------------------------------------------------------
 	// ------------------ MONGO ERRORS ----------------------
@@ -27,7 +27,7 @@ const errorHandler = (err, req, res, next) => {
 	}
 
 	// ---------------------------------------------------------
-	// ------------------ POSTGRES ERRORS ----------------------
+	// ----------------- SEQUELIZE ERRORS ----------------------
 	// ---------------------------------------------------------
 	if (err.name === 'SequelizeValidationError') {
 		// add log for err.message
