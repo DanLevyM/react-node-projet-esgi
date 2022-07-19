@@ -36,6 +36,20 @@ services:
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
     container_name: pg_c
 
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    env_file: .env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: $MONGO_ROOT_NAME
+      MONGO_INITDB_ROOT_PASSWORD: $MONGO_ROOT_PWD
+    volumes:
+      - ./SampleCollections:/usr/local/sampleCollections
+      - mongo-data:/data/db
+    working_dir: /usr/local/sampleCollections
+    container_name: mongo_c
+
   # pgadmin:
   #   image: dpage/pgadmin4
   #   environment:
@@ -52,16 +66,3 @@ volumes:
   mongo-data: {}
   db-data: {}
   pgadmin: {}
-
-  # mongo:
-  #   image: mongo
-  #   ports:
-  #     - 27017:27017
-  #   environment:
-  #     MONGO_INITDB_ROOT_USERNAME: root
-  #     MONGO_INITDB_ROOT_PASSWORD: password
-  #   volumes:
-  #     - ./SampleCollections:/usr/local/sampleCollections
-  #     - mongo-data:/data/db
-  #   working_dir: /usr/local/sampleCollections
-  #   container_name: mongo_c

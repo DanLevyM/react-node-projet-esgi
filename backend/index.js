@@ -9,6 +9,7 @@ const SecurityRouter = require('./server/routes/security-router');
 const AdminRouter = require('./server/routes/admin-router');
 const ReportRouter = require('./server/routes/report-router');
 const RelationsRouter = require('./server/routes/relations-router');
+const AnalyticsRouter = require('./server/routes/analytics-router');
 
 const app = express();
 app.use(express.json());
@@ -24,6 +25,7 @@ app.use('/api/v1/users', UserRouter);
 app.use('/api/v1/auth', SecurityRouter);
 app.use('/api/v1/admin', AdminRouter);
 app.use('/api/v1/report', ReportRouter);
+app.use('/api/v1/analytics', AnalyticsRouter);
 
 app.use(errorHandler);
 
