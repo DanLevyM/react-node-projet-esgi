@@ -4,7 +4,7 @@ const { formatError } = require('../utils/formatError');
 // eslint-disable-next-line no-unused-vars
 const errorHandler = (err, req, res, next) => {
 	let error = { ...err };
-	console.log(err.stack);
+	console.error(err);
 
 	// ---------------------------------------------------------
 	// ------------------ MONGO ERRORS ----------------------
@@ -41,7 +41,7 @@ const errorHandler = (err, req, res, next) => {
 	if (err.name === 'SequelizeDatabaseError')
 		error = new ErrorResponse('Database error', err.statusCode);
 
-	if (err.name === 'Error')
+	if (err.name === 'Error' || err.name === 'TypeError')
 		error = new ErrorResponse(err.message, err.statusCode);
 
 	res

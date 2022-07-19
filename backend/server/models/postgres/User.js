@@ -56,7 +56,7 @@ User.init(
 			allowNull: true,
 		},
 		technologies: {
-			type: DataTypes.STRING,
+			type: DataTypes.ARRAY(DataTypes.STRING),
 			allowNull: true,
 			required: false,
 		},

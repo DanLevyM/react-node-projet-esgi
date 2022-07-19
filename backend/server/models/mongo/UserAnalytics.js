@@ -6,11 +6,13 @@ const UserAnaliticsSchema = new mongoose.Schema({
 		required: false,
 		unique: false,
 	},
-	technologies: {
-		type: String,
-		required: false,
-		unique: false,
-	},
+	technologies: [
+		{
+			type: String,
+			required: false,
+			unique: false,
+		},
+	],
 });
 
 const UserAnalitics = mongoose.model('UserAnalitics', UserAnaliticsSchema);
