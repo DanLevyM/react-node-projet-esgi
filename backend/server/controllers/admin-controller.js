@@ -30,7 +30,6 @@ exports.deleteUser = asyncHandler(async (req, res, next) => {
 			firstName: 'Deleted',
 			lastName: null,
 			token: null,
-			isActive: false,
 		},
 		{
 			where: { id: parseInt(req.params.id, 10) },

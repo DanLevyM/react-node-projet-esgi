@@ -1,7 +1,7 @@
 const User = require('../models/postgres/User');
+const UserAnalitics = require('../models/mongo/UserAnalytics');
 const { ValidationError } = require('sequelize');
 const { formatError } = require('../utils/formatError');
-const { getRandomString } = require('../utils/getRandomString');
 
 // @desc    Get all users
 // @path    GET /api/v1/users
@@ -36,42 +36,31 @@ exports.getUser = async (req, res) => {
 // @desc    Delete my account
 // @path    DELETE /api/v1/users/:id
 // @access  Private
-exports.deleteMe = async (req, res) => {
+exports.deleteMe = async (req, res, next) => {
 	if (req.user.id !== parseInt(req.params.id, 10)) {
 		return res.sendStatus(403);
 	}
 
 	try {
-		// Anonymize the user and keep datas
-		const [, rows] = await User.update(
-			{
-				email: `${getRandomString()}@gmail.com`,
-				password: getRandomString(),
-				firstName: 'Deleted',
-				lastName: null,
-				token: null,
-				isActive: false,
+		const userToDelete = await User.findByPk(req.user.id);
+		const addStatsToUser = {
+			role: userToDelete.dataValues.role,
+			technologies: userToDelete.dataValues.technologies || '',
+		};
+		const userToAddForStats = await UserAnalitics.create(addStatsToUser);
+
+		const nbline = await User.destroy({
+			where: {
+				id: req.params.id,
 			},
-			{
-				where: { id: parseInt(req.params.id, 10) },
-				returning: true,
-				individualHooks: true,
-			}
-		);
-		if (!rows[0]) {
-			res.sendStatus(407);
+		});
+		if (!nbline) {
+			res.sendStatus(404);
 		} else {
-			res.json(rows[0]);
+			res.sendStatus(204);
 		}
 
-		// const nbline = await User.destroy({
-		// 	where: {
-		// 		id: req.params.id,
-		// 	},
-		// });
-		// if (!nbline) {
-		// 	res.sendStatus(404);
-		// } else res.sendStatus(204);
+		return next(res.json(userToAddForStats));
 	} catch (error) {
 		console.error(error);
 		res.sendStatus(500);

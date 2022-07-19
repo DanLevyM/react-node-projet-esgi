@@ -1,9 +1,14 @@
 const mongoose = require('./db.js');
 
 const UserAnaliticsSchema = new mongoose.Schema({
-	name: {
+	role: {
 		type: String,
-		required: true,
+		required: false,
+		unique: false,
+	},
+	technologies: {
+		type: String,
+		required: false,
 		unique: false,
 	},
 });
