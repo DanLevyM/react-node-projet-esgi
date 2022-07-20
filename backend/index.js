@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 const express = require('express');
 const morgan = require('morgan');
-
+const cors = require('cors');
 const errorHandler = require('./server/middlewares/error');
 
 const UserRouter = require('./server/routes/users-router');
@@ -12,6 +12,7 @@ const RelationsRouter = require('./server/routes/relations-router');
 const AnalyticsRouter = require('./server/routes/analytics-router');
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.SERVER_PORT || 3000;
