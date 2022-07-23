@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signInUser } from '../../api/security.api';
+
 import classes from './LoginPage.module.css';
+import { signInUser } from '../../api/security.api';
+import UserContext from '../../context/UserContext.jsx';
 
 const LoginPage = () => {
 	const nav = useNavigate();
+	const { authUser } = useContext(UserContext);
+
 	const handleLoginForm = async (e) => {
 		e.preventDefault();
 
@@ -16,13 +20,14 @@ const LoginPage = () => {
 		try {
 			const res = await signInUser(postData);
 			console.log(res);
+			localStorage.setItem('isAuth', true);
 			localStorage.setItem('token', res.token);
-			alert('Signed in');
+			authUser(true);
 		} catch (e) {
 			console.error(e);
 		}
 
-		nav('/get-users');
+		nav('/home');
 	};
 
 	return (

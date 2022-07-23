@@ -11,7 +11,7 @@ const {
 const router = new Router();
 
 router.route('/');
-router.route('/get-users').get(checkAuthentication, getUsers);
+router.route('/').get(checkAuthentication, getUsers);
 router
 	.route('/me')
 	.get(checkAuthentication, getMe)

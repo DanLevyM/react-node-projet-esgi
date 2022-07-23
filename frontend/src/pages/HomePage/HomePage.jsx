@@ -8,6 +8,7 @@ const HomePage = () => {
 		const token = `Bearer ${localStorage.getItem('token')}`;
 		try {
 			const res = await getUsers(token);
+			console.log(res);
 			setUsers(res);
 		} catch (e) {
 			console.error(e);
