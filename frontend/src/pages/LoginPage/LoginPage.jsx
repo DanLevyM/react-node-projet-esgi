@@ -20,10 +20,14 @@ const LoginPage = () => {
 
 		try {
 			const res = await signInUser(postData);
-			console.log(res);
-			localStorage.setItem('isAuth', true);
-			localStorage.setItem('token', res.token);
-			authUser(true);
+			if (res.code === 200) {
+				localStorage.setItem('isAuth', true);
+				localStorage.setItem('token', res.token);
+				localStorage.setItem('role', res.role);
+				authUser(true, res.role);
+			} else {
+				console.error('Sign in failed !');
+			}
 		} catch (e) {
 			console.error(e);
 		}
@@ -46,25 +50,24 @@ const LoginPage = () => {
 				</div>
 			</div>
 			{/* <button onClick={getUsersList}>Load</button> */}
+			<form className={classes.h1} onSubmit={handleLoginForm}>
+				LoginPage
+				<div className='container'>
+					<label htmlFor='email'>Email</label>
+					<input
+						type='text'
+						placeholder='user@gmail.com'
+						name='email'
+						defaultValue='admin@gmail.com'
+					/>
+				</div>
+				<div className='container'>
+					<label htmlFor='password'>Password</label>
+					<input type='text' placeholder='Your password' name='password' />
+				</div>
+				<button type='submit'>Sign In</button>
+			</form>
 		</div>
-
-		// <form className={classes.h1} onSubmit={handleLoginForm}>
-		// 	LoginPage
-		// 	<div className='container'>
-		// 		<label htmlFor='email'>Email</label>
-		// 		<input
-		// 			type='text'
-		// 			placeholder='user@gmail.com'
-		// 			name='email'
-		// 			defaultValue='user1@gmail.com'
-		// 		/>
-		// 	</div>
-		// 	<div className='container'>
-		// 		<label htmlFor='password'>Password</label>
-		// 		<input type='text' placeholder='Your password' name='password' />
-		// 	</div>
-		// 	<button type='submit'>Sign In</button>
-		// </form>
 	);
 };
 

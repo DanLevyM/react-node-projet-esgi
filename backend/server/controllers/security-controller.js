@@ -17,8 +17,8 @@ exports.login = asyncHandler(async (req, res) => {
 	console.log('result ==============================', result);
 	if (result && (await bcryptjs.compare(req.body.password, result.password))) {
 		const token = await createToken(result);
-		await result.update({ token });
-		res.json({ token });
+		await result.update({ token, code: 200 });
+		res.json({ token, role: result.dataValues.role, code: 200 });
 	} else {
 		res.sendStatus(401);
 	}

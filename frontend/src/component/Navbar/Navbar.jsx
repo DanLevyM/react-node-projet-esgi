@@ -12,7 +12,8 @@ const Navbar = () => {
 	const logoutUser = () => {
 		authUser(false);
 		localStorage.removeItem('isAuth');
-
+		localStorage.removeItem('token');
+		localStorage.removeItem('role');
 		nav('/home');
 	};
 

@@ -22,6 +22,7 @@ body {
 }
 
 .h1 {
+	position: relative;
 	font-size: 3em;
 	font-weight: bold;
 	padding: 2em 0 0.5em 0;

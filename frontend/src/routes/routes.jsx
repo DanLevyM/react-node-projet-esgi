@@ -6,6 +6,8 @@ import Navbar from '../component/Navbar/Navbar';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import HomePage from '../pages/HomePage/HomePage';
+import AdminPage from '../pages/AdminPage/AdminPage';
+
 import UserContext from '../context/UserContext';
 
 const OnlyWhen = ({ condition, otherwise, children }) => {
@@ -38,7 +40,19 @@ export default function MyRouter() {
 						}
 					/>
 
-					<Route path='/home' element={<HomePage />} />
+					<Route
+						path='/admin'
+						element={
+							<OnlyWhen
+								condition={user.isAuth && user.role === 'admin'}
+								otherwise='/home'
+							>
+								<AdminPage />
+							</OnlyWhen>
+						}
+					/>
+
+					<Route path='/home' element={<LoginPage />} />
 					{/* <Route path='*' element={<NotFound />}/> */}
 				</Routes>
 			</BrowserRouter>
