@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import UserContext from '../../context/UserContext';
-import { userIsAuth } from '../../utils/local-storage';
+import { userIsAuth, userRole } from '../../utils/local-storage';
 
 import c from './Navbar.module.css';
 
@@ -27,6 +27,15 @@ const Navbar = () => {
 						Home
 					</Link>
 				</li>
+				{userRole() === 'admin' ? (
+					<li className={c.li}>
+						<Link to={'/admin'} className={c.link}>
+							Dashboard
+						</Link>
+					</li>
+				) : (
+					<></>
+				)}
 				{!userIsAuth() ? (
 					<>
 						<li className={c.li}>

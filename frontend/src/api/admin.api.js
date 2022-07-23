@@ -3,8 +3,8 @@ export const getUsers = async (token) => {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
-			Authorization: token,
+			Authorization: `Bearer ${token}`,
 		},
 	});
-	return res.json();
+	return [await res.json()];
 };

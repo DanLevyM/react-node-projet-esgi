@@ -1,0 +1,39 @@
+.container {
+	display: block;
+	margin-left: 25%;
+	color: blue;
+}
+
+.button {
+	background-color: rgb(220, 220, 225);
+}
+
+.cardContainer {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.card {
+	width: 25%;
+	border: 1px solid white;
+	border-radius: 1em;
+	margin: 1em;
+	padding: 0.5em;
+}
+
+.h3 {
+	text-decoration: none;
+	color: white;
+	padding: 0.5em;
+}
+
+.faContainer {
+	margin-top: 0.5em;
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.faItem {
+	cursor: pointer;
+	padding: 0.5em;
+}
