@@ -1,3 +1,105 @@
+html,
+body {
+	height: 100%;
+}
+
+.container {
+	height: 100%;
+	position: relative;
+}
+
+.options {
+	background-color: red;
+}
+.center {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	width: 70%;
+}
+
 .h1 {
-	color: red;
+	font-size: 3em;
+	font-weight: bold;
+	padding: 2em 0 0.5em 0;
+}
+
+.h2 {
+	padding: 0.5em 0;
+	font-size: 2em;
+}
+
+.p {
+	font-size: 1em;
+	margin: 2em 0 0 0;
+	padding: 1em 0;
+	font-weight: bold;
+}
+
+.btnContainer {
+	width: 40%;
+}
+
+.btnRegister {
+	display: block;
+	background-color: #1b8cd8; /* Green */
+	border: none;
+	color: white;
+	padding: 1em 4em;
+	margin: 2em 0 0 0;
+	/* padding: 15px 32px; */
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 2em;
+	cursor: pointer;
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+	opacity: 0.6;
+	transition: 0.3s;
+	width: 100%;
+}
+
+.btnRegister:hover {
+	opacity: 1;
+}
+
+.btnRegister:active {
+	background-color: #1b8cd8;
+	box-shadow: 0 5px #666;
+	transform: translateY(4px);
+}
+
+.btnLogin {
+	display: block;
+	background-color: #15202b; /* Green */
+	border: 0.5px solid white;
+	color: #1f9bf0;
+	padding: 1em 4em;
+	/* padding: 15px 32px; */
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 2em;
+	cursor: pointer;
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+	opacity: 0.6;
+	transition: 0.3s;
+	width: 100%;
+}
+
+.btnLogin:hover {
+	opacity: 1;
+}
+
+.btnLogin:active {
+	background-color: #1b8cd8;
+	box-shadow: 0 5px #666;
+	transform: translateY(4px);
 }

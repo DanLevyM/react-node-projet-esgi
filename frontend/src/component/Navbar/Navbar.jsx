@@ -17,7 +17,7 @@ const Navbar = () => {
 	};
 
 	return (
-		<nav>
+		<nav id='navbar-container'>
 			<Link to={'/home'}>Home</Link>
 			{!userIsAuth() ? (
 				<>

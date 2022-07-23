@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { getUsers } from '../../api/users.api';
 
+import classes from './HomePage.module.css';
+
 const HomePage = () => {
 	const [users, setUsers] = useState([]);
 
@@ -16,14 +18,13 @@ const HomePage = () => {
 	};
 
 	return (
-		<div>
-			<ul>
-				{users.map((user) => {
-					<li key={user.id}>{user.firstName}</li>;
-				})}
-			</ul>
-			<button onClick={getUsersList}>Load</button>
-		</div>
+		<></>
+		// <div className={classes.container}>
+		// 	<div className={classes.center}>
+		// 		<p className={classes.options}>m on the right</p>
+		// 	</div>
+		// 	{/* <button onClick={getUsersList}>Load</button> */}
+		// </div>
 	);
 };
 

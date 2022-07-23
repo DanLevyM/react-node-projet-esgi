@@ -18,7 +18,7 @@ export default function MyRouter() {
 	return (
 		<>
 			<BrowserRouter>
-				<Navbar />
+				{user.isAuth ? <Navbar /> : <></>}
 				<Routes>
 					<Route
 						path='/register'

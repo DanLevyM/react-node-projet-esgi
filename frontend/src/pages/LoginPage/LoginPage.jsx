@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { GoOrganization } from 'react-icons/go';
 
 import classes from './LoginPage.module.css';
 import { signInUser } from '../../api/security.api';
@@ -31,23 +32,39 @@ const LoginPage = () => {
 	};
 
 	return (
-		<form className={classes.h1} onSubmit={handleLoginForm}>
-			LoginPage
-			<div className='container'>
-				<label htmlFor='email'>Email</label>
-				<input
-					type='text'
-					placeholder='user@gmail.com'
-					name='email'
-					defaultValue='user1@gmail.com'
-				/>
+		<div className={classes.container}>
+			<div className={classes.center}>
+				<GoOrganization size={32} />
+				<h1 className={classes.h1}>Ça se passe maintenant</h1>
+				<h2 className={classes.h2}>Rejoignez nous dès aujourd&#39;hui</h2>
+				<div className={classes.btnContainer}>
+					<div className={classes.btnRegister}>
+						S&#39;inscrire avec une adresse mail
+					</div>
+					<p className={classes.p}>Vous avec déjà un compte ?</p>
+					<div className={classes.btnLogin}>Se connecter</div>
+				</div>
 			</div>
-			<div className='container'>
-				<label htmlFor='password'>Password</label>
-				<input type='text' placeholder='Your password' name='password' />
-			</div>
-			<button type='submit'>Sign In</button>
-		</form>
+			{/* <button onClick={getUsersList}>Load</button> */}
+		</div>
+
+		// <form className={classes.h1} onSubmit={handleLoginForm}>
+		// 	LoginPage
+		// 	<div className='container'>
+		// 		<label htmlFor='email'>Email</label>
+		// 		<input
+		// 			type='text'
+		// 			placeholder='user@gmail.com'
+		// 			name='email'
+		// 			defaultValue='user1@gmail.com'
+		// 		/>
+		// 	</div>
+		// 	<div className='container'>
+		// 		<label htmlFor='password'>Password</label>
+		// 		<input type='text' placeholder='Your password' name='password' />
+		// 	</div>
+		// 	<button type='submit'>Sign In</button>
+		// </form>
 	);
 };
 
