@@ -1,0 +1,89 @@
+body.active-modal {
+  overflow: hidden;
+}
+
+.btnLogin {
+	display: block;
+	background-color: #15202b; /* Green */
+	border: 0.5px solid white;
+	color: #1f9bf0;
+	padding: 1em 4em;
+	/* padding: 15px 32px; */
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 2em;
+	cursor: pointer;
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+	opacity: 0.6;
+	transition: 0.3s;
+	width: 100%;
+}
+
+.btnLogin:hover {
+	opacity: 1;
+}
+
+.btnRegister {
+	display: block;
+	background-color: #1b8cd8; /* Green */
+	border: none;
+	color: white;
+	padding: 1em 4em;
+	margin: 2em 0 0 0;
+	/* padding: 15px 32px; */
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 2em;
+	cursor: pointer;
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+	opacity: 0.6;
+	transition: 0.3s;
+	width: 100%;
+}
+
+.btnRegister:hover {
+	opacity: 1;
+}
+
+
+.modal, .overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.overlay {
+    background-color: rgba(49, 49, 49, 0.8);
+}
+
+.modal-content {
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  line-height: 1.4;
+  border-radius: 3px;
+  box-shadow: 0 0 20px #ccc;
+  margin: 100px auto;
+  padding: 20px;
+  width: 400px;
+}
+
+.close-modal {
+  cursor: pointer;
+  font-size: 30px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 2;
+}
+
