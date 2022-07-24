@@ -98,3 +98,41 @@ export const getAllRelations = async (token) => {
 	});
 	return await res.json();
 };
+
+export const blockUser = async (token, user_to_block) => {
+	const res = await fetch('http://localhost:3001/api/v1/friends/block', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+		body: JSON.stringify({ user_to_block }),
+	});
+	return await res.json();
+};
+
+export const unBlockUser = async (token, user_to_unblock) => {
+	await fetch('http://localhost:3001/api/v1/friends/unblock', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+		body: JSON.stringify({ user_to_unblock }),
+	});
+};
+
+export const showBlockUser = async (token) => {
+	const res = await fetch(
+		'http://localhost:3001/api/v1/friends/users-blocked',
+		{
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`,
+			},
+		}
+	);
+
+	return await res.json();
+};

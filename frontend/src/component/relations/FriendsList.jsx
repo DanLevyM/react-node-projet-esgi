@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import UserContext from '..//context/UserContext';
+import UserContext from '../../context/UserContext';
 import { GoTrashcan } from 'react-icons/go';
 
-import { getFriends, deleteFriend } from '../api/relations.api';
-import { generateKey } from '../utils/string';
+import { getFriends, deleteFriend } from '../../api/relations.api';
+import { generateKey } from '../../utils/string';
 
 const FriendsList = ({ open }) => {
 	const [friends, setFriends] = useState({});
@@ -31,7 +31,7 @@ const FriendsList = ({ open }) => {
 		return () => {
 			isCancelled = true;
 		};
-	}, [friendListUpdated]);
+	}, [friendListUpdated, open]);
 
 	if (!open) return null;
 

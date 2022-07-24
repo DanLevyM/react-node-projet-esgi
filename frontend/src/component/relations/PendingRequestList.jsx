@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import UserContext from '..//context/UserContext';
 import { GoTrashcan } from 'react-icons/go';
 
-import { getPendingReq, delFriendReq } from '../api/relations.api';
-import { generateKey } from '../utils/string';
+import { getPendingReq, delFriendReq } from '../../api/relations.api';
+import { generateKey } from '../../utils/string';
 
 const PendingRequestList = ({ open }) => {
 	const [pendingReq, setPendingReq] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
 	const [friendReqListUpdated, setFriendReqListUpdated] = useState(1);
-	const { user } = useContext(UserContext);
 
 	useEffect(() => {
 		let isCancelled = false;

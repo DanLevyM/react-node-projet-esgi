@@ -7,8 +7,8 @@ import {
 	getFriendsReq,
 	delFriendReq,
 	answerFriendReq,
-} from '../api/relations.api';
-import { generateKey } from '../utils/string';
+} from '../../api/relations.api';
+import { generateKey } from '../../utils/string';
 
 const FriendsRequests = ({ open }) => {
 	const [friendsReq, setFriendsReq] = useState({});

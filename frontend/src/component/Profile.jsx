@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Profile = ({ open }) => {
-	if (!open) return null;
+const Profile = () => {
 	return (
 		<>
 			<h1>My profile</h1>
@@ -10,10 +9,6 @@ const Profile = ({ open }) => {
 	);
 };
 
-Profile.propTypes = {
-	open: PropTypes.bool,
-	children: PropTypes.node,
-	onClose: PropTypes.func,
-};
+Profile.propTypes = {};
 
 export default Profile;

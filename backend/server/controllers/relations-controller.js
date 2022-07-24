@@ -223,18 +223,18 @@ exports.deleteFriend = asyncHandler(async (req, res, next) => {
 // @body		{ id_requester: int, answer: string }
 exports.answerFriendsRequest = asyncHandler(async (req, res, next) => {
 	if (req.user.id === parseInt(req.body.id_requester))
-		return next(new ErrorResponse('Same ids!', 422));
+		return next(new ErrorResponse('Same ids!', 400));
 
 	if (!parseInt(req.body.id_requester) || !req.body.answer)
 		return next(new ErrorResponse('Request cannot be processed.', 400));
 
 	if (req.body.answer !== 'accept' && req.body.answer !== 'decline')
-		return next(new ErrorResponse('#WRA.', 422)); // Wrong Response Answer
+		return next(new ErrorResponse('#WRA.', 400)); // Wrong Response Answer
 
 	const transmitterUser = await User.findOne({
 		where: { id: req.body.id_requester },
 	});
-	if (!transmitterUser) return next(new ErrorResponse('#NO', 422)); // No User
+	if (!transmitterUser) return next(new ErrorResponse('#NO', 400)); // No User
 
 	const usersRelation = await UsersRelations.findOne({
 		where: {
@@ -257,7 +257,7 @@ exports.answerFriendsRequest = asyncHandler(async (req, res, next) => {
 		},
 	});
 
-	if (!usersRelation) return next(new ErrorResponse('#NFRF', 422)); // No Friend Request Found
+	if (!usersRelation) return next(new ErrorResponse('#NFRF', 400)); // No Friend Request Found
 
 	if (req.body.answer === 'accept') {
 		usersRelation.update({ status: 'friends' });
@@ -272,10 +272,10 @@ exports.answerFriendsRequest = asyncHandler(async (req, res, next) => {
 
 exports.blockUser = asyncHandler(async (req, res, next) => {
 	if (!req.body.user_to_block)
-		return next(new ErrorResponse('Request cannot be processed.', 422));
+		return next(new ErrorResponse('Request cannot be processed.', 400));
 
 	if (req.user.id === parseInt(req.body.user_to_block))
-		return next(new ErrorResponse('Same ids!', 422));
+		return next(new ErrorResponse('Same ids!', 400));
 
 	const usersRelationExists = await UsersRelations.findOne({
 		where: {
@@ -295,7 +295,11 @@ exports.blockUser = asyncHandler(async (req, res, next) => {
 			],
 		},
 	});
-
+	console.log(
+		usersRelationExists,
+		typeof req.body.user_to_block,
+		typeof req.user.id
+	);
 	if (usersRelationExists) {
 		req.user.id < req.body.user_to_block
 			? usersRelationExists.update({ status: 'user_low_block_high' })
@@ -303,7 +307,7 @@ exports.blockUser = asyncHandler(async (req, res, next) => {
 		return res.json({ usersRelationExists });
 	} else {
 		req.user.id < req.body.user_to_block
-			? usersRelationExists.create({
+			? await UsersRelations.create({
 					user_low: req.user.id,
 					user_high: req.body.user_to_block,
 					status: 'user_low_block_high',
@@ -315,14 +319,15 @@ exports.blockUser = asyncHandler(async (req, res, next) => {
 			  });
 		res.json({}, 201);
 	}
+	next();
 });
 
 exports.unblockUser = asyncHandler(async (req, res, next) => {
 	if (!req.body.user_to_unblock)
-		return next(new ErrorResponse('Request cannot be processed.', 422));
+		return next(new ErrorResponse('Request cannot be processed.', 400));
 
 	if (req.user.id === parseInt(req.body.user_to_unblock))
-		return next(new ErrorResponse('Same ids!', 422));
+		return next(new ErrorResponse('Same ids!', 400));
 
 	const usersRelationExists = await UsersRelations.findOne({
 		where: {
@@ -349,7 +354,7 @@ exports.unblockUser = asyncHandler(async (req, res, next) => {
 		usersRelationExists.destroy();
 		return res.json({}, 204);
 	}
-	return next(new ErrorResponse('#NR', 422)); // No Relation
+	return next(new ErrorResponse('#NR', 400)); // No Relation
 });
 
 exports.getAllRelations = asyncHandler(async (req, res, next) => {

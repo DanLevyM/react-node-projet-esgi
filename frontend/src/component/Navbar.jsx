@@ -25,6 +25,19 @@ const Navbar = () => {
 				<li>
 					<Link to={'/'}>Home</Link>
 				</li>
+				{userRole() === 'admin' || userRole() === 'user' ? (
+					<>
+						<li>
+							<Link to={'/relations'}>Relations</Link>
+						</li>
+						<li>
+							<Link to={'/profile'}>Profile</Link>
+						</li>
+					</>
+				) : (
+					<></>
+				)}
+
 				{userRole() === 'admin' ? (
 					<li>
 						<Link to={'/admin'}>Dashboard</Link>

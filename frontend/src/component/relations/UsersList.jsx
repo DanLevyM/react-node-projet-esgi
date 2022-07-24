@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 
 import { GoTrashcan } from 'react-icons/go';
 import { AiFillPlusCircle } from 'react-icons/ai';
-import { sendFriendReq, getAllRelations } from '../api/relations.api';
-import { getUsers } from '../api/admin.api';
-import { generateKey } from '../utils/string';
-import UserContext from '../context/UserContext';
+import {
+	sendFriendReq,
+	getAllRelations,
+	blockUser,
+} from '../../api/relations.api';
+import { getUsers } from '../../api/admin.api';
+import { generateKey } from '../../utils/string';
+import UserContext from '../../context/UserContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const UsersList = ({ open }) => {
@@ -55,23 +59,27 @@ const UsersList = ({ open }) => {
 		return () => {
 			isCancelled = true;
 		};
-	}, [isListUpdt]);
+	}, [isListUpdt, open]);
 
 	if (!open) return null;
 
 	const sendFriendRequest = async (id) => {
-		sendFriendReq(localStorage.getItem('token'), id);
+		await sendFriendReq(localStorage.getItem('token'), id);
+		setIsListUpdt(Math.random());
+	};
+
+	const blockUserClick = async (id) => {
+		const res = await blockUser(localStorage.getItem('token'), id);
+		console.log(id, res);
 		setIsListUpdt(Math.random());
 	};
 
 	return (
 		<div>
+			<h1>USERS LIST</h1>
 			{!isLoading ? (
 				users.map((el, index) => (
-					<div
-						key={generateKey('div', index)}
-						// onClick={() => nav(`/admin/user/${el.id}`)}
-					>
+					<div key={generateKey('div', index)}>
 						<h3 key={generateKey('name', index)}>
 							{el.firstName} {el.lastName}
 						</h3>
@@ -87,6 +95,7 @@ const UsersList = ({ open }) => {
 								key={generateKey('del', index)}
 								color='red'
 								size={25}
+								onClick={() => blockUserClick(el.id)}
 							/>
 						</div>
 					</div>

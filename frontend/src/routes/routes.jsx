@@ -7,6 +7,8 @@ import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 import HomePage from '../pages/HomePage';
 import AdminPage from '../pages/AdminPage/AdminPage';
+import UserRelationsPage from '../pages/UserRelationsPage';
+import ProfilePage from '../pages/ProfilePage';
 
 import UserContext from '../context/UserContext';
 import UserDetailsPage from '../pages/AdminPage/UserDetailsPage';
@@ -46,6 +48,24 @@ export default function MyRouter() {
 						element={
 							<OnlyWhen condition={user.isAuth} otherwise='/login'>
 								<HomePage />
+							</OnlyWhen>
+						}
+					/>
+
+					<Route
+						path='/relations'
+						element={
+							<OnlyWhen condition={user.isAuth} otherwise='/login'>
+								<UserRelationsPage />
+							</OnlyWhen>
+						}
+					/>
+
+					<Route
+						path='/profile'
+						element={
+							<OnlyWhen condition={user.isAuth} otherwise='/login'>
+								<ProfilePage />
 							</OnlyWhen>
 						}
 					/>
