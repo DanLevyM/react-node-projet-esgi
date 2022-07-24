@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { getUsers } from '../../api/users.api';
+import { getUsers } from '../api/users.api';
 
-import classes from './HomePage.module.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const HomePage = () => {
 	const [users, setUsers] = useState([]);
@@ -19,9 +19,9 @@ const HomePage = () => {
 
 	return (
 		<></>
-		// <div className={classes.container}>
-		// 	<div className={classes.center}>
-		// 		<p className={classes.options}>m on the right</p>
+		// <div >
+		// 	<div >
+		// 		<p>m on the right</p>
 		// 	</div>
 		// 	{/* <button onClick={getUsersList}>Load</button> */}
 		// </div>

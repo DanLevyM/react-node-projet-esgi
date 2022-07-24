@@ -3,8 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import UserContext from '../../context/UserContext';
 import { userIsAuth, userRole } from '../../utils/local-storage';
-
-import c from './Navbar.module.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Navbar = () => {
 	const { user, authUser } = useContext(UserContext);
@@ -20,38 +19,30 @@ const Navbar = () => {
 	};
 
 	return (
-		<nav className={c.nav}>
-			<ul className={c.ul}>
-				<li className={c.li}>
-					<Link to={'/home'} className={c.link}>
-						Home
-					</Link>
+		<nav>
+			<ul>
+				<li>
+					<Link to={'/home'}>Home</Link>
 				</li>
 				{userRole() === 'admin' ? (
-					<li className={c.li}>
-						<Link to={'/admin'} className={c.link}>
-							Dashboard
-						</Link>
+					<li>
+						<Link to={'/admin'}>Dashboard</Link>
 					</li>
 				) : (
 					<></>
 				)}
 				{!userIsAuth() ? (
 					<>
-						<li className={c.li}>
-							<Link to={'/login'} className={c.link}>
-								Login
-							</Link>
+						<li>
+							<Link to={'/login'}>Login</Link>
 						</li>
-						<li className={c.li}>
-							<Link to={'/register'} className={c.link}>
-								Register
-							</Link>
+						<li>
+							<Link to={'/register'}>Register</Link>
 						</li>
 					</>
 				) : (
-					<li className={c.li} onClick={() => logoutUser()}>
-						<p className={c.link}>Logout</p>
+					<li onClick={() => logoutUser()}>
+						<p>Logout</p>
 					</li>
 				)}
 			</ul>

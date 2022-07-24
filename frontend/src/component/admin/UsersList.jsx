@@ -1,16 +1,19 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { GoTrashcan } from 'react-icons/go';
 import { AiFillPlusCircle } from 'react-icons/ai';
-import ModalDeleteUser from '../../component/ModalDeleteUser/ModalDeleteUser';
 import { getUsers } from '../../api/admin.api';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import c from './UsersList.module.css';
 const UsersList = ({ open }) => {
 	const [users, setUsers] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
+	const nav = useNavigate();
+
+	const [isDeleteModal, setIsDeleteModal] = useState(false);
 
 	useEffect(() => {
 		let isCancelled = false;
@@ -44,30 +47,31 @@ const UsersList = ({ open }) => {
 	};
 
 	return (
-		<div className={c.cardContainer}>
+		<div>
 			{!isLoading ? (
 				users[0].map((el, index) => (
-					<div key={generateKey('div', index)} className={c.card}>
-						<h3 key={generateKey('name', index)} className={c.h3}>
+					<div
+						key={generateKey('div', index)}
+						onClick={() => nav(`/admin/user/${el.id}`)}
+					>
+						<h3 key={generateKey('name', index)}>
 							{el.firstName} {el.lastName}
 						</h3>
-						<h3 key={generateKey('email', index)} className={c.h3}>
-							{el.email}
-						</h3>
-						<div key={generateKey('fa-cont', index)} className={c.faContainer}>
+						<h3 key={generateKey('email', index)}>{el.email}</h3>
+						{/* <div key={generateKey('fa-cont', index)} ontainer}>
 							<AiFillPlusCircle
 								key={generateKey('upd', index)}
 								color='white'
 								size={25}
-								className={c.faItem}
+								tem}
 							/>
 							<GoTrashcan
 								key={generateKey('del', index)}
 								color='red'
 								size={25}
-								className={c.faItem}
+								tem}
 							/>
-						</div>
+						</div> */}
 					</div>
 				))
 			) : (

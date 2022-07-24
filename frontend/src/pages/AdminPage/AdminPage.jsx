@@ -3,9 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import { GoTrashcan } from 'react-icons/go';
 import { AiFillPlusCircle } from 'react-icons/ai';
-import c from './AdminPage.module.css';
 import { getUsers } from '../../api/admin.api';
 import UsersList from '../../component/admin/UsersList';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const OtherButton = ({ open }) => {
 	if (!open) return null;
@@ -17,10 +17,9 @@ const AdminPage = () => {
 	const [isOtherButton, setOtherButton] = useState(false);
 
 	return (
-		<div className={c.container}>
-			<div className={c.btnContainer}>
+		<div>
+			<div>
 				<button
-					className={c.button}
 					onClick={() => {
 						setIsUserList(true);
 						setOtherButton(false);
@@ -29,7 +28,6 @@ const AdminPage = () => {
 					Show users
 				</button>
 				<button
-					className={c.button}
 					onClick={() => {
 						setOtherButton(true);
 						setIsUserList(false);

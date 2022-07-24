@@ -2,13 +2,14 @@ import React, { useContext } from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Navbar from '../component/Navbar/Navbar';
-import LoginPage from '../pages/LoginPage/LoginPage';
-import RegisterPage from '../pages/RegisterPage/RegisterPage';
-import HomePage from '../pages/HomePage/HomePage';
+import Navbar from '../component/admin/Navbar';
+import LoginPage from '../pages/LoginPage';
+import RegisterPage from '../pages/RegisterPage';
+import HomePage from '../pages/HomePage';
 import AdminPage from '../pages/AdminPage/AdminPage';
 
 import UserContext from '../context/UserContext';
+import UserDetailsPage from '../pages/AdminPage/UserDetailsPage';
 
 const OnlyWhen = ({ condition, otherwise, children }) => {
 	return condition ? children : <Navigate to={otherwise} />;
@@ -40,6 +41,17 @@ export default function MyRouter() {
 						}
 					/>
 
+					<Route
+						path='/admin/user/:id'
+						element={
+							<OnlyWhen
+								condition={user.isAuth && user.role === 'admin'}
+								otherwise='/home'
+							>
+								<UserDetailsPage />
+							</OnlyWhen>
+						}
+					/>
 					<Route
 						path='/admin'
 						element={
