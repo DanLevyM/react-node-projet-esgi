@@ -33,7 +33,6 @@ const UserDetailsPage = () => {
 
 	const handleFormUpdateUserByAdmin = async (e) => {
 		e.preventDefault();
-		console.log(user);
 		const body = {
 			email: e.target.elements.email.value,
 			firstName: e.target.elements.firstName.value,

@@ -16,6 +16,7 @@ exports.showFriendsList = asyncHandler(async (req, res, next) => {
 
 	const relations = await getUserRelations(req.params.id);
 
+	console.log(relations);
 	if (relations.length === 0) return res.json({ friends: [] }, 200);
 
 	const friendsToParse = getSpecificUserRelation('friends', relations);
@@ -127,6 +128,31 @@ exports.sendFriendRequest = asyncHandler(async (req, res, next) => {
 		return next(new ErrorResponse('Relation already exists.', 400));
 	const result = await UsersRelations.create(datas);
 	if (result) res.json(result, 201);
+});
+
+// @path    DEL /api/v1/friends/add
+// @access  Private
+// @body		{ id_receiver: int }
+exports.deleteFriendRequest = asyncHandler(async (req, res, next) => {
+	if (req.user.id === parseInt(req.body.id_receiver))
+		return next(new ErrorResponse('Same ids.', 400));
+
+	if (!(await User.findByPk(req.body.id_receiver)))
+		return next(new ErrorResponse('User does not exist.', 400));
+
+	const datas = orderUsersIds({
+		user_low: req.user.id,
+		user_high: req.body.id_receiver,
+	});
+
+	const relationAlreadyExists = await UsersRelations.destroy({
+		where: {
+			[Op.and]: [{ user_low: datas.user_low }, { user_high: datas.user_high }],
+		},
+	});
+	if (relationAlreadyExists === 0)
+		return next(new ErrorResponse('Relation does not exist !', 400));
+	res.json({}, 204);
 });
 
 // @path    DEL /api/v1/friends/delete
@@ -292,6 +318,15 @@ exports.unblockUser = asyncHandler(async (req, res, next) => {
 		return res.json({}, 204);
 	}
 	return next(new ErrorResponse('#NR', 422)); // No Relation
+});
+
+exports.getAllRelations = asyncHandler(async (req, res, next) => {
+	const relations = await UsersRelations.findAll({
+		where: {
+			[Op.or]: [{ user_low: req.user.id }, { user_high: req.user.id }],
+		},
+	});
+	return res.json(relations);
 });
 
 // ------------------------------------------------------------

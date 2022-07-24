@@ -3,12 +3,14 @@ import { getUsers } from '../api/users.api';
 import UsersList from '../component/UsersList';
 import Profile from '../component/Profile';
 import FriendsList from '../component/FriendsList';
+import PendingRequestList from '../component/PendingRequestList';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const HomePage = () => {
 	const [isUsersList, setIsUsersList] = useState(true);
 	const [isFriendsList, setIsFriendsList] = useState(false);
 	const [isMyProfile, setIsMyProfile] = useState(false);
+	const [isPendingRequests, setIsPendingRequest] = useState(false);
 
 	// const getUsersList = async () => {
 	// 	const token = `Bearer ${localStorage.getItem('token')}`;
@@ -29,6 +31,7 @@ const HomePage = () => {
 						setIsUsersList(true);
 						setIsFriendsList(false);
 						setIsMyProfile(false);
+						setIsPendingRequest(false);
 					}}
 				>
 					Users list
@@ -39,6 +42,7 @@ const HomePage = () => {
 						setIsUsersList(false);
 						setIsFriendsList(true);
 						setIsMyProfile(false);
+						setIsPendingRequest(false);
 					}}
 				>
 					Friends list
@@ -48,6 +52,18 @@ const HomePage = () => {
 					onClick={() => {
 						setIsUsersList(false);
 						setIsFriendsList(false);
+						setIsPendingRequest(true);
+						setIsMyProfile(false);
+					}}
+				>
+					Pending requests
+				</button>
+
+				<button
+					onClick={() => {
+						setIsUsersList(false);
+						setIsFriendsList(false);
+						setIsPendingRequest(false);
 						setIsMyProfile(true);
 					}}
 				>
@@ -56,6 +72,7 @@ const HomePage = () => {
 			</div>
 			<UsersList open={isUsersList} />
 			<FriendsList open={isFriendsList} />
+			<PendingRequestList open={isPendingRequests} />
 			<Profile open={isMyProfile} />
 		</div>
 	);

@@ -6,7 +6,7 @@ export const getUsers = async (token) => {
 			Authorization: `Bearer ${token}`,
 		},
 	});
-	return [await res.json()];
+	return await res.json();
 };
 
 export const getUser = async (token, id) => {
@@ -40,5 +40,4 @@ export const deleteUser = async (token, id) => {
 			Authorization: `Bearer ${token}`,
 		},
 	});
-	// return await res.json();
 };

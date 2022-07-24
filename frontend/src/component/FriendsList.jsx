@@ -36,11 +36,8 @@ const FriendsList = ({ open }) => {
 	if (!open) return null;
 
 	const removeFriendClick = async (id) => {
-		console.log(id);
 		const res = await deleteFriend(localStorage.getItem('token'), id);
-		console.log(await res);
 		setFriendListUpdated(Math.random());
-		return;
 	};
 
 	return (
