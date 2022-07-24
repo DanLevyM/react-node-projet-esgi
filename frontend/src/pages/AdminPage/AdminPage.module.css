@@ -5,7 +5,23 @@
 }
 
 .button {
-	background-color: rgb(220, 220, 225);
+	display: block;
+	background-color: #1b8cd8; /* Green */
+	border: none;
+	color: white;
+	padding: 1em 4em;
+	margin: 2em 0 0 0;
+	/* padding: 15px 32px; */
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 2em;
+	cursor: pointer;
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+	opacity: 0.6;
+	transition: 0.3s;
 }
 
 .cardContainer {
@@ -36,4 +52,10 @@
 .faItem {
 	cursor: pointer;
 	padding: 0.5em;
+}
+
+.btnContainer {
+	display: flex;
+	justify-content: space-evenly;
+	margin-bottom: 2em;
 }

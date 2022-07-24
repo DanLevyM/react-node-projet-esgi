@@ -1,86 +1,45 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-key */
 import React, { useState, useEffect } from 'react';
 import { GoTrashcan } from 'react-icons/go';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import c from './AdminPage.module.css';
 import { getUsers } from '../../api/admin.api';
+import UsersList from '../../component/admin/UsersList';
 
+const OtherButton = ({ open }) => {
+	if (!open) return null;
+
+	return <p>Other Content</p>;
+};
 const AdminPage = () => {
-	const [users, setUsers] = useState({});
-	const [isLoading, setIsLoading] = useState(true);
-
-	useEffect(() => {
-		let isCancelled = false;
-
-		const retrieveUsers = async () => {
-			const res = await getUsers(localStorage.getItem('token'));
-			if (!isCancelled) {
-				setIsLoading(false);
-				setUsers(res);
-			}
-		};
-
-		if (!isCancelled) {
-			setIsLoading(true);
-			retrieveUsers();
-		}
-
-		return () => {
-			isCancelled = true;
-		};
-	}, []);
-
-	const showUsers = () => {
-		console.log(users[0]);
-	};
-
-	const generateKey = (str, index) => {
-		return `${str}-${index}`;
-	};
+	const [isUserList, setIsUserList] = useState(false);
+	const [isOtherButton, setOtherButton] = useState(false);
 
 	return (
 		<div className={c.container}>
-			<button
-				className={c.button}
-				onClick={() => {
-					showUsers();
-				}}
-			>
-				users
-			</button>
-			<div className={c.cardContainer}>
-				{!isLoading ? (
-					users[0].map((el, index) => (
-						<div key={generateKey('div', index)} className={c.card}>
-							<h3 key={generateKey('name', index)} className={c.h3}>
-								{el.firstName} {el.lastName}
-							</h3>
-							<h3 key={generateKey('email', index)} className={c.h3}>
-								{el.email}
-							</h3>
-							<div
-								key={generateKey('fa-cont', index)}
-								className={c.faContainer}
-							>
-								<AiFillPlusCircle
-									key={generateKey('upd', index)}
-									color='white'
-									size={25}
-									className={c.faItem}
-								/>
-								<GoTrashcan
-									key={generateKey('del', index)}
-									color='red'
-									size={25}
-									className={c.faItem}
-								/>
-							</div>
-						</div>
-					))
-				) : (
-					<></>
-				)}
+			<div className={c.btnContainer}>
+				<button
+					className={c.button}
+					onClick={() => {
+						setIsUserList(true);
+						setOtherButton(false);
+					}}
+				>
+					Show users
+				</button>
+				<button
+					className={c.button}
+					onClick={() => {
+						setOtherButton(true);
+						setIsUserList(false);
+					}}
+				>
+					Other button
+				</button>
 			</div>
+			<UsersList open={isUserList} />
+			<OtherButton open={isOtherButton} />
 		</div>
 	);
 };
