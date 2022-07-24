@@ -20,5 +20,5 @@ export const signInUser = async (postData) => {
 		},
 		body: postData,
 	});
-	return res.json();
+	return await res.json();
 };

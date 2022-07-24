@@ -1,7 +1,7 @@
 import React from 'react';
-import classes from './RegisterPage.module.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { registerUser } from '../../api/security.api';
+import { registerUser } from '../api/security.api';
 
 const LoginPage = () => {
 	const handleRegisterForm = async (e) => {
@@ -16,12 +16,12 @@ const LoginPage = () => {
 	};
 
 	return (
-		<form onSubmit={handleRegisterForm} className={classes.h1}>
-			<div className='container'>
+		<form onSubmit={handleRegisterForm}>
+			<div>
 				<label htmlFor='email'>Email</label>
 				<input type='text' placeholder='user@gmail.com' name='email' />
 			</div>
-			<div className='container'>
+			<div>
 				<label htmlFor='password'>Password</label>
 				<input type='text' placeholder='Your password' name='password' />
 			</div>

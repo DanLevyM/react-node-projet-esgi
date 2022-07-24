@@ -4,3 +4,10 @@ export const userIsAuth = () => {
 	if (isAuth) return true;
 	return false;
 };
+
+export const userRole = () => {
+	const role = localStorage.getItem('role');
+
+	if (role) return role;
+	return false;
+};
