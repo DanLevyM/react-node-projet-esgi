@@ -4,6 +4,7 @@ const {
 	sendFriendRequest,
 	showFriendsList,
 	showPendingFriendsList,
+	showFriendsRequests,
 	showBlockedUsers,
 	answerFriendsRequest,
 	blockUser,
@@ -16,6 +17,7 @@ const {
 const router = new Router();
 
 router.route('/pendings').get(checkAuthentication, showPendingFriendsList);
+router.route('/requests').get(checkAuthentication, showFriendsRequests);
 router.route('/block').post(checkAuthentication, blockUser);
 router.route('/unblock').post(checkAuthentication, unblockUser);
 router.route('/users-blocked').get(checkAuthentication, showBlockedUsers);

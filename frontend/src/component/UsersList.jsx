@@ -31,11 +31,13 @@ const UsersList = ({ open }) => {
 			});
 
 			const usersToAddToList = [];
-			res.forEach((user) => {
-				if (relationToRemove.includes(user.id)) {
+			res.forEach((userFromRes) => {
+				if (relationToRemove.includes(userFromRes.id)) {
+					return;
+				} else if (userFromRes.id === parseInt(user.id)) {
 					return;
 				} else {
-					usersToAddToList.push(user);
+					usersToAddToList.push(userFromRes);
 				}
 			});
 

@@ -74,6 +74,38 @@ exports.showPendingFriendsList = asyncHandler(async (req, res, next) => {
 	res.json({ friends: pendingsRequests });
 });
 
+// @path    GET /api/v1/friends/requests
+// @access  Private
+exports.showFriendsRequests = asyncHandler(async (req, res, next) => {
+	const relations = await getUserRelations(req.user.id);
+	const usersIdPendings = [];
+	relations.forEach((relation) => {
+		if (
+			relation.dataValues.user_low === req.user.id &&
+			relation.dataValues.status === 'user_high_pending_request'
+		) {
+			usersIdPendings.push(relation.dataValues.user_high);
+		} else if (
+			relation.dataValues.user_high === req.user.id &&
+			relation.dataValues.status === 'user_low_pending_request'
+		) {
+			usersIdPendings.push(relation.dataValues.user_low);
+		}
+	});
+
+	const pendingsRequests = [];
+	for (let i = 0; i < usersIdPendings.length; i++) {
+		const userFound = await User.findByPk(usersIdPendings[i]);
+		pendingsRequests.push({
+			email: userFound.dataValues.email,
+			firstName: userFound.dataValues.firstName,
+			lastName: userFound.dataValues.lastName,
+			id: userFound.dataValues.id,
+		});
+	}
+	res.json({ friends: pendingsRequests });
+});
+
 // @path    GET /api/v1/friends/users-blocked
 // @access  Private
 exports.showBlockedUsers = asyncHandler(async (req, res, next) => {
@@ -194,7 +226,7 @@ exports.answerFriendsRequest = asyncHandler(async (req, res, next) => {
 		return next(new ErrorResponse('Same ids!', 422));
 
 	if (!parseInt(req.body.id_requester) || !req.body.answer)
-		return next(new ErrorResponse('Request cannot be processed.', 422));
+		return next(new ErrorResponse('Request cannot be processed.', 400));
 
 	if (req.body.answer !== 'accept' && req.body.answer !== 'decline')
 		return next(new ErrorResponse('#WRA.', 422)); // Wrong Response Answer

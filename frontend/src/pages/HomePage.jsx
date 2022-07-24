@@ -5,12 +5,14 @@ import Profile from '../component/Profile';
 import FriendsList from '../component/FriendsList';
 import PendingRequestList from '../component/PendingRequestList';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import FriendsRequests from '../component/FriendsRequests';
 
 const HomePage = () => {
 	const [isUsersList, setIsUsersList] = useState(true);
 	const [isFriendsList, setIsFriendsList] = useState(false);
-	const [isMyProfile, setIsMyProfile] = useState(false);
 	const [isPendingRequests, setIsPendingRequest] = useState(false);
+	const [isFriendsRequest, setIsFriendsRequests] = useState(false);
+	const [isMyProfile, setIsMyProfile] = useState(false);
 
 	// const getUsersList = async () => {
 	// 	const token = `Bearer ${localStorage.getItem('token')}`;
@@ -30,6 +32,7 @@ const HomePage = () => {
 					onClick={() => {
 						setIsUsersList(true);
 						setIsFriendsList(false);
+						setIsFriendsRequests(false);
 						setIsMyProfile(false);
 						setIsPendingRequest(false);
 					}}
@@ -41,6 +44,8 @@ const HomePage = () => {
 					onClick={() => {
 						setIsUsersList(false);
 						setIsFriendsList(true);
+						setIsFriendsRequests(false);
+
 						setIsMyProfile(false);
 						setIsPendingRequest(false);
 					}}
@@ -52,6 +57,7 @@ const HomePage = () => {
 					onClick={() => {
 						setIsUsersList(false);
 						setIsFriendsList(false);
+						setIsFriendsRequests(false);
 						setIsPendingRequest(true);
 						setIsMyProfile(false);
 					}}
@@ -64,6 +70,19 @@ const HomePage = () => {
 						setIsUsersList(false);
 						setIsFriendsList(false);
 						setIsPendingRequest(false);
+						setIsFriendsRequests(true);
+						setIsMyProfile(false);
+					}}
+				>
+					Friends requests
+				</button>
+
+				<button
+					onClick={() => {
+						setIsUsersList(false);
+						setIsFriendsList(false);
+						setIsFriendsRequests(false);
+						setIsPendingRequest(false);
 						setIsMyProfile(true);
 					}}
 				>
@@ -72,6 +91,7 @@ const HomePage = () => {
 			</div>
 			<UsersList open={isUsersList} />
 			<FriendsList open={isFriendsList} />
+			<FriendsRequests open={isFriendsRequest} />
 			<PendingRequestList open={isPendingRequests} />
 			<Profile open={isMyProfile} />
 		</div>

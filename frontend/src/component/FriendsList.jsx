@@ -42,6 +42,7 @@ const FriendsList = ({ open }) => {
 
 	return (
 		<>
+			<h1>FRIENDS LIST</h1>
 			{!isLoading ? (
 				friends.friends.map((el, index) => (
 					<div key={generateKey('div', index)}>
