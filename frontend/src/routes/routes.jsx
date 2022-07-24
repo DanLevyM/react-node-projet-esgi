@@ -7,6 +7,7 @@ import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 import HomePage from '../pages/HomePage';
 import AdminPage from '../pages/AdminPage/AdminPage';
+import NotFoundPage from '../pages/NotFoundPage';
 
 import UserContext from '../context/UserContext';
 import UserDetailsPage from '../pages/AdminPage/UserDetailsPage';
@@ -26,7 +27,7 @@ export default function MyRouter() {
 					<Route
 						path='/register'
 						element={
-							<OnlyWhen condition={!user.isAuth} otherwise='/home'>
+							<OnlyWhen condition={!user.isAuth} otherwise='/'>
 								<RegisterPage />
 							</OnlyWhen>
 						}
@@ -35,7 +36,16 @@ export default function MyRouter() {
 					<Route
 						path='/login'
 						element={
-							<OnlyWhen condition={!user.isAuth} otherwise='/home'>
+							<OnlyWhen condition={!user.isAuth} otherwise='/'>
+								<LoginPage />
+							</OnlyWhen>
+						}
+					/>
+
+					<Route
+						path='/'
+						element={
+							<OnlyWhen condition={user.isAuth} otherwise='/login'>
 								<LoginPage />
 							</OnlyWhen>
 						}
@@ -46,7 +56,7 @@ export default function MyRouter() {
 						element={
 							<OnlyWhen
 								condition={user.isAuth && user.role === 'admin'}
-								otherwise='/home'
+								otherwise='/login'
 							>
 								<UserDetailsPage />
 							</OnlyWhen>
@@ -57,15 +67,14 @@ export default function MyRouter() {
 						element={
 							<OnlyWhen
 								condition={user.isAuth && user.role === 'admin'}
-								otherwise='/home'
+								otherwise='/login'
 							>
 								<AdminPage />
 							</OnlyWhen>
 						}
 					/>
 
-					<Route path='/home' element={<LoginPage />} />
-					{/* <Route path='*' element={<NotFound />}/> */}
+					<Route path='*' element={<NotFoundPage />} />
 				</Routes>
 			</BrowserRouter>
 		</>

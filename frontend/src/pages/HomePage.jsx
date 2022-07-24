@@ -18,7 +18,9 @@ const HomePage = () => {
 	};
 
 	return (
-		<></>
+		<>
+			<h1>Homepage</h1>
+		</>
 		// <div >
 		// 	<div >
 		// 		<p>m on the right</p>
