@@ -1,9 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-key */
 import React, { useState, useEffect } from 'react';
-import { GoTrashcan } from 'react-icons/go';
-import { AiFillPlusCircle } from 'react-icons/ai';
-import { getUsers } from '../../api/admin.api';
 import UsersList from '../../component/admin/UsersList';
 import 'bootstrap/dist/css/bootstrap.min.css';
 

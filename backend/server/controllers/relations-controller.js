@@ -110,10 +110,10 @@ exports.showBlockedUsers = asyncHandler(async (req, res, next) => {
 // @body		{ id_receiver: int }
 exports.sendFriendRequest = asyncHandler(async (req, res, next) => {
 	if (req.user.id === parseInt(req.body.id_receiver))
-		return next(new ErrorResponse('Same ids.', 422));
+		return next(new ErrorResponse('Same ids.', 400));
 
 	if (!(await User.findByPk(req.body.id_receiver)))
-		return next(new ErrorResponse('User does not exist.', 422));
+		return next(new ErrorResponse('User does not exist.', 400));
 
 	const datas = orderUsersIds({
 		user_low: req.user.id,
@@ -124,9 +124,40 @@ exports.sendFriendRequest = asyncHandler(async (req, res, next) => {
 		where: { user_low: datas.user_low, user_high: datas.user_high },
 	});
 	if (relationAlreadyExists)
-		return next(new ErrorResponse('Relation already exists.', 422));
+		return next(new ErrorResponse('Relation already exists.', 400));
 	const result = await UsersRelations.create(datas);
 	if (result) res.json(result, 201);
+});
+
+// @path    DEL /api/v1/friends/delete
+// @access  Private
+// @body		{ id_receiver: int }
+exports.deleteFriend = asyncHandler(async (req, res, next) => {
+	if (req.user.id === parseInt(req.body.id_receiver))
+		return next(new ErrorResponse('Same ids.', 400));
+
+	if (!(await User.findByPk(req.body.id_receiver)))
+		return next(new ErrorResponse('User does not exist.', 400));
+
+	const datas = orderUsersIds({
+		user_low: req.user.id,
+		user_high: req.body.id_receiver,
+	});
+
+	const relationAlreadyExists = await UsersRelations.findOne({
+		where: { user_low: datas.user_low, user_high: datas.user_high },
+	});
+	if (!relationAlreadyExists)
+		return next(new ErrorResponse('Relation does not exist.', 400));
+
+	console.log(relationAlreadyExists);
+	const result = await UsersRelations.destroy({
+		where: {
+			user_low: datas.user_low,
+			user_high: datas.user_high,
+		},
+	});
+	if (result) res.json(204);
 });
 
 // @path    POST /api/v1/friends/request-answer

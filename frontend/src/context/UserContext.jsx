@@ -1,19 +1,19 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { userIsAuth, userRole } from '../utils/local-storage';
+import { userIsAuth, userRole, userId } from '../utils/local-storage';
 
 const UserContext = createContext();
 
 export function UserProvider({ children }) {
 	const [user, setUser] = useState({
-		id: 0,
+		id: userId(),
 		isAuth: userIsAuth(),
 		role: userRole(),
 	});
 
-	const authUser = (bool, role) => {
-		setUser({ ...user, isAuth: bool, role });
+	const authUser = (id, bool, role) => {
+		setUser({ ...user, id, isAuth: bool, role });
 	};
 
 	return (

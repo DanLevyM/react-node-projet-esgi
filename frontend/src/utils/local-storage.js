@@ -11,3 +11,10 @@ export const userRole = () => {
 	if (role) return role;
 	return false;
 };
+
+export const userId = () => {
+	const id = localStorage.getItem('id');
+
+	if (id) return id;
+	return 0;
+};

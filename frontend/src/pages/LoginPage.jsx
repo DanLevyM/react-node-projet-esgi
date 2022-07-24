@@ -19,11 +19,13 @@ const LoginPage = () => {
 
 		try {
 			const res = await signInUser(postData);
+			console.log(res);
 			if (res.code === 200) {
+				localStorage.setItem('id', res.id);
 				localStorage.setItem('isAuth', true);
 				localStorage.setItem('token', res.token);
 				localStorage.setItem('role', res.role);
-				authUser(true, res.role);
+				authUser(res.id, true, res.role);
 			} else {
 				console.error('Sign in failed !');
 			}

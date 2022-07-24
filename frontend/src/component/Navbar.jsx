@@ -12,6 +12,7 @@ const Navbar = () => {
 
 	const logoutUser = () => {
 		authUser(false);
+		localStorage.removeItem('id');
 		localStorage.removeItem('isAuth');
 		localStorage.removeItem('token');
 		localStorage.removeItem('role');
