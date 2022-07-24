@@ -31,7 +31,7 @@ const LoginPage = () => {
 			console.error(e);
 		}
 
-		nav('/home');
+		nav('/');
 	};
 
 	return (

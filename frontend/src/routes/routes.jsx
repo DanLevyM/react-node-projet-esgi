@@ -2,12 +2,11 @@ import React, { useContext } from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Navbar from '../component/admin/Navbar';
+import Navbar from '../component/Navbar';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 import HomePage from '../pages/HomePage';
 import AdminPage from '../pages/AdminPage/AdminPage';
-import NotFoundPage from '../pages/NotFoundPage';
 
 import UserContext from '../context/UserContext';
 import UserDetailsPage from '../pages/AdminPage/UserDetailsPage';
@@ -46,7 +45,7 @@ export default function MyRouter() {
 						path='/'
 						element={
 							<OnlyWhen condition={user.isAuth} otherwise='/login'>
-								<LoginPage />
+								<HomePage />
 							</OnlyWhen>
 						}
 					/>
@@ -73,8 +72,6 @@ export default function MyRouter() {
 							</OnlyWhen>
 						}
 					/>
-
-					<Route path='*' element={<NotFoundPage />} />
 				</Routes>
 			</BrowserRouter>
 		</>
