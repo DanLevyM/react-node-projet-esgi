@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { showBlockUser, unBlockUser } from '../../api/relations.api';
 import { generateKey } from '../../utils/string';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const BlockedUsersList = ({ open }) => {
 	const [usersBlocked, setUsersBlocked] = useState({});

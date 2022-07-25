@@ -1,9 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { registerUser } from '../api/security.api';
 
-const LoginPage = () => {
+const RegisterPage = () => {
+	const nav = useNavigate();
+
 	const handleRegisterForm = async (e) => {
 		e.preventDefault();
 
@@ -12,7 +15,8 @@ const LoginPage = () => {
 			password: e.target.elements.password.value,
 		});
 
-		await registerUser(postData);
+		const code = await registerUser(postData);
+		if (parseInt(code) === 201) nav('/login');
 	};
 
 	return (
@@ -48,6 +52,7 @@ const LoginPage = () => {
 							placeholder='Your password'
 							name='password'
 							className='form-control'
+							autoComplete='true'
 							required
 						/>
 					</div>
@@ -62,4 +67,4 @@ const LoginPage = () => {
 	);
 };
 
-export default LoginPage;
+export default RegisterPage;

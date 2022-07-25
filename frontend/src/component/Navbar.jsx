@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import UserContext from '../context/UserContext';
 import { userIsAuth, userRole } from '../utils/local-storage';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Navbar = () => {
 	const { user, authUser } = useContext(UserContext);

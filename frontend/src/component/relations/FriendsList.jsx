@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import UserContext from '../../context/UserContext';
 import { GoTrashcan } from 'react-icons/go';
 
+import UserContext from '../../context/UserContext';
 import { getFriends, deleteFriend } from '../../api/relations.api';
 import { generateKey } from '../../utils/string';
 

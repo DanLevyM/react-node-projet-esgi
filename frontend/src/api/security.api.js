@@ -13,6 +13,7 @@ export const registerUser = async (postData) => {
 			alert('Please insert a correct password');
 		else alert('Please add a correct email');
 	}
+	return res.status;
 };
 
 export const signInUser = async (postData) => {

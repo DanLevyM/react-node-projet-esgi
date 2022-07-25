@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { useParams, useNavigate } from 'react-router-dom';
 import { getUser, updateUser, deleteUser } from '../../api/admin.api';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const UserDetailsPage = () => {
 	const [user, setUser] = useState({});

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import UserContext from '../context/UserContext';
 import Navbar from '../component/Navbar';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
@@ -9,8 +10,6 @@ import HomePage from '../pages/HomePage';
 import AdminPage from '../pages/AdminPage/AdminPage';
 import UserRelationsPage from '../pages/UserRelationsPage';
 import ProfilePage from '../pages/ProfilePage';
-
-import UserContext from '../context/UserContext';
 import UserDetailsPage from '../pages/AdminPage/UserDetailsPage';
 
 const OnlyWhen = ({ condition, otherwise, children }) => {

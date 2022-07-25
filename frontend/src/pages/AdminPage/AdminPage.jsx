@@ -1,7 +1,6 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-key */
 import React, { useState, useEffect } from 'react';
 import UsersList from '../../component/admin/UsersList';
+import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const OtherButton = ({ open }) => {
@@ -39,6 +38,10 @@ const AdminPage = () => {
 			<OtherButton open={isOtherButton} />
 		</div>
 	);
+};
+
+OtherButton.propTypes = {
+	open: PropTypes.bool,
 };
 
 export default AdminPage;

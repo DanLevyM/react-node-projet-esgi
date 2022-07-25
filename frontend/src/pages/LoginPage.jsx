@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 import { GoOrganization } from 'react-icons/go';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { signInUser } from '../api/security.api';
 import UserContext from '../context/UserContext.jsx';
+import { signInUser } from '../api/security.api';
 
 const LoginPage = () => {
 	const nav = useNavigate();
@@ -72,6 +72,7 @@ const LoginPage = () => {
 							placeholder='Your password'
 							name='password'
 							className='form-control'
+							autoComplete='true'
 						/>
 					</div>
 				</div>

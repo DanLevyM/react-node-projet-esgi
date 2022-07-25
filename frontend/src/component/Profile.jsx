@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/UserContext';
-import PropTypes from 'prop-types';
 import { getMe, updateMe, deleteMe } from '../api/users.api';
 
 const Profile = () => {
@@ -43,6 +42,7 @@ const Profile = () => {
 			body.password = e.target.elements.password.value;
 
 		await updateMe(localStorage.getItem('token'), body);
+		nav('/');
 	};
 
 	const handleDeleteMe = async (e) => {
@@ -135,7 +135,5 @@ const Profile = () => {
 		</div>
 	);
 };
-
-Profile.propTypes = {};
 
 export default Profile;

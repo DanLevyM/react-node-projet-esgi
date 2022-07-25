@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -63,6 +62,10 @@ const UsersList = ({ open }) => {
 			)}
 		</div>
 	);
+};
+
+UsersList.propTypes = {
+	open: PropTypes.bool,
 };
 
 export default UsersList;

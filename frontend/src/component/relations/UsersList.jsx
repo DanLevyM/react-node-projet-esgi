@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { GoTrashcan } from 'react-icons/go';
 import { AiFillPlusCircle } from 'react-icons/ai';
+
+import UserContext from '../../context/UserContext';
 import {
 	sendFriendReq,
 	getAllRelations,
@@ -10,8 +12,6 @@ import {
 } from '../../api/relations.api';
 import { getUsers } from '../../api/admin.api';
 import { generateKey } from '../../utils/string';
-import UserContext from '../../context/UserContext';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const UsersList = ({ open }) => {
 	const { user } = useContext(UserContext);
