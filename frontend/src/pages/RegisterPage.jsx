@@ -16,17 +16,47 @@ const LoginPage = () => {
 	};
 
 	return (
-		<form onSubmit={handleRegisterForm}>
-			<div>
-				<label htmlFor='email'>Email</label>
-				<input type='text' placeholder='user@gmail.com' name='email' />
+		<div
+			className='mx-auto mt-5 p-2 border border-1 rounded'
+			style={{ width: '500px' }}
+		>
+			<div className='pb-2 pt-2'>
+				<h1>Sign in</h1>
 			</div>
-			<div>
-				<label htmlFor='password'>Password</label>
-				<input type='text' placeholder='Your password' name='password' />
-			</div>
-			<button type='submit'>Register</button>
-		</form>
+			<form onSubmit={handleRegisterForm} className='pb-3'>
+				<div className='form-group row p-1'>
+					<label htmlFor='email' className='col-sm-2 col-form-label'>
+						Email
+					</label>
+					<div className='col-sm-10'>
+						<input
+							type='text'
+							placeholder='user@gmail.com'
+							name='email'
+							className='form-control'
+						/>
+					</div>
+				</div>
+				<div className='form-group row p-1'>
+					<label htmlFor='password' className='col-sm-2 col-form-label'>
+						Password
+					</label>
+					<div className='col-sm-10'>
+						<input
+							type='text'
+							placeholder='Your password'
+							name='password'
+							className='form-control'
+						/>
+					</div>
+				</div>
+				<div className='text-center m-2'>
+					<button type='submit' className='btn btn-primary btn-sm w-100'>
+						Register
+					</button>
+				</div>
+			</form>
+		</div>
 	);
 };
 

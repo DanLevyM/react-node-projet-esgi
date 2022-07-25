@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 import { GoOrganization } from 'react-icons/go';
 
@@ -37,34 +38,57 @@ const LoginPage = () => {
 	};
 
 	return (
-		<div>
-			<div>
+		<div
+			className='mx-auto mt-5 p-2 border border-1 rounded'
+			style={{ width: '500px' }}
+		>
+			<div className='pb-2 pt-2'>
 				<GoOrganization size={32} />
 				<h1>Ça se passe maintenant</h1>
 				<h2>Rejoignez nous dès aujourd&#39;hui</h2>
-				<div>
-					<div>S&#39;inscrire avec une adresse mail</div>
-					<p>Vous avec déjà un compte ?</p>
-					<div>Se connecter</div>
-				</div>
 			</div>
-			{/* <button onClick={getUsersList}>Load</button> */}
-			<form onSubmit={handleLoginForm}>
-				LoginPage
-				<div>
-					<label htmlFor='email'>Email</label>
-					<input
-						type='text'
-						placeholder='user@gmail.com'
-						name='email'
-						defaultValue='admin@gmail.com'
-					/>
+			<form onSubmit={handleLoginForm} className='pb-3'>
+				<div className='form-group row p-1'>
+					<label htmlFor='email' className='col-sm-2 col-form-label'>
+						Email
+					</label>
+					<div className='col-sm-10'>
+						<input
+							type='text'
+							placeholder='user@gmail.com'
+							name='email'
+							defaultValue='admin@gmail.com'
+							className='form-control'
+						/>
+					</div>{' '}
 				</div>
-				<div>
-					<label htmlFor='password'>Password</label>
-					<input type='text' placeholder='Your password' name='password' />
+				<div className='form-group row p-1'>
+					<label htmlFor='password' className='col-sm-2 col-form-label'>
+						Password
+					</label>
+					<div className='col-sm-10'>
+						<input
+							type='password'
+							placeholder='Your password'
+							name='password'
+							className='form-control'
+						/>
+					</div>
 				</div>
-				<button type='submit'>Sign In</button>
+				<div className='text-center m-2'>
+					<button type='submit' className='btn btn-primary btn-sm w-100'>
+						Sign In
+					</button>
+				</div>
+				<div className='text-center m-2'>
+					<p
+						type=''
+						className='btn btn-primary btn-sm w-100'
+						onClick={() => nav('/register')}
+					>
+						Sign up
+					</p>
+				</div>
 			</form>
 		</div>
 	);

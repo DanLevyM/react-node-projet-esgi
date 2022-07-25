@@ -75,28 +75,33 @@ const UsersList = ({ open }) => {
 	};
 
 	return (
-		<div>
-			<h1>USERS LIST</h1>
+		<div className='d-flex align-content-start justify-content-around flex-wrap w-100 mt-5'>
 			{!isLoading ? (
 				users.map((el, index) => (
-					<div key={generateKey('div', index)}>
-						<h3 key={generateKey('name', index)}>
-							{el.firstName} {el.lastName}
-						</h3>
-						<h3 key={generateKey('email', index)}>{el.email}</h3>
-						<div key={generateKey('fa-cont', index)}>
-							<AiFillPlusCircle
-								key={generateKey('upd', index)}
-								color='blue'
-								size={25}
-								onClick={() => sendFriendRequest(el.id)}
-							/>
-							<GoTrashcan
-								key={generateKey('del', index)}
-								color='red'
-								size={25}
-								onClick={() => blockUserClick(el.id)}
-							/>
+					<div key={generateKey('div', index)} className='card w-25 m-1'>
+						<div className='card-body'>
+							<div className='card-title'>
+								<h3 key={generateKey('name', index)}>
+									{el.firstName} {el.lastName}
+								</h3>
+							</div>
+							<div className='card-text'>
+								<h5 key={generateKey('email', index)}>{el.email}</h5>
+							</div>
+							<div key={generateKey('fa-cont', index)} className='d-flex'>
+								<AiFillPlusCircle
+									color='blue'
+									size={25}
+									key={generateKey('upd', index)}
+									onClick={() => sendFriendRequest(el.id)}
+								/>
+								<GoTrashcan
+									color='red'
+									size={25}
+									key={generateKey('del', index)}
+									onClick={() => blockUserClick(el.id)}
+								/>
+							</div>
 						</div>
 					</div>
 				))

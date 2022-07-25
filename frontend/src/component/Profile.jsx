@@ -53,9 +53,7 @@ const Profile = () => {
 			localStorage.removeItem('isAuth');
 			localStorage.removeItem('token');
 			localStorage.removeItem('role');
-			setInterval(() => {
-				nav('/login');
-			}, 2000);
+			nav('/login');
 		}
 	};
 

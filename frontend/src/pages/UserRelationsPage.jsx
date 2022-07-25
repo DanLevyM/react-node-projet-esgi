@@ -13,21 +13,11 @@ const UserRelationsPage = () => {
 	const [isFriendsRequest, setIsFriendsRequests] = useState(false);
 	const [isBlock, setIsBlock] = useState(false);
 
-	// const getUsersList = async () => {
-	// 	const token = `Bearer ${localStorage.getItem('token')}`;
-	// 	try {
-	// 		const res = await getUsers(token);
-	// 		console.log(res);
-	// 		setUsers(res);
-	// 	} catch (e) {
-	// 		console.error(e);
-	// 	}
-	// };
-
 	return (
-		<div>
-			<div>
+		<div className='container-fluid'>
+			<div className='btn-group d-flex justify-content-center'>
 				<button
+					className='btn btn-secondary'
 					onClick={() => {
 						setIsUsersList(true);
 						setIsFriendsList(false);
@@ -40,6 +30,7 @@ const UserRelationsPage = () => {
 				</button>
 
 				<button
+					className='btn btn-secondary'
 					onClick={() => {
 						setIsUsersList(false);
 						setIsFriendsList(true);
@@ -52,6 +43,7 @@ const UserRelationsPage = () => {
 				</button>
 
 				<button
+					className='btn btn-secondary'
 					onClick={() => {
 						setIsUsersList(false);
 						setIsFriendsList(false);
@@ -64,6 +56,7 @@ const UserRelationsPage = () => {
 				</button>
 
 				<button
+					className='btn btn-secondary'
 					onClick={() => {
 						setIsUsersList(false);
 						setIsFriendsList(false);
@@ -76,6 +69,7 @@ const UserRelationsPage = () => {
 				</button>
 
 				<button
+					className='btn btn-secondary'
 					onClick={() => {
 						setIsUsersList(false);
 						setIsFriendsList(false);

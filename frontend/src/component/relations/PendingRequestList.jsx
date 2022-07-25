@@ -39,27 +39,30 @@ const PendingRequestList = ({ open }) => {
 	};
 
 	return (
-		<>
-			<h1>PENDING</h1>
+		<div className='d-flex align-content-start justify-content-around flex-wrap w-100 mt-5'>
 			{!isLoading ? (
 				pendingReq.friends.map((el, index) => (
-					<div key={generateKey('div-pend', index)}>
-						<h3 key={generateKey('name-pend', index)}>
-							{el.firstName} {el.lastName}
-						</h3>
-						<h3 key={generateKey('email-pend', index)}>{el.email}</h3>
-						<GoTrashcan
-							key={generateKey('del-pend', index)}
-							color='red'
-							size={25}
-							onClick={() => removePendingReqClick(el.id)}
-						/>
+					<div key={generateKey('div-pend', index)} className='card w-25 m-1'>
+						<div className='card-body'>
+							<h3 key={generateKey('name-pend', index)} className='card-title'>
+								{el.firstName} {el.lastName}
+							</h3>
+							<h5 key={generateKey('email-pend', index)} className='card-text'>
+								{el.email}
+							</h5>
+							<GoTrashcan
+								key={generateKey('del-pend', index)}
+								color='red'
+								size={25}
+								onClick={() => removePendingReqClick(el.id)}
+							/>
+						</div>
 					</div>
 				))
 			) : (
 				<></>
 			)}{' '}
-		</>
+		</div>
 	);
 };
 

@@ -53,33 +53,47 @@ const FriendsRequests = ({ open }) => {
 	};
 
 	return (
-		<>
-			<h1>FRIENDS REQUESTS</h1>
+		<div className='d-flex align-content-start justify-content-around flex-wrap w-100 mt-5'>
 			{!isLoading ? (
 				friendsReq.friends.map((el, index) => (
-					<div key={generateKey('div-friendReq', index)}>
-						<h3 key={generateKey('name-friendReq', index)}>
-							{el.firstName} {el.lastName}
-						</h3>
-						<h3 key={generateKey('email-friendReq', index)}>{el.email}</h3>
-						<FaGithubAlt
-							key={generateKey('accept-friendReq', index)}
-							color='green'
-							size={25}
-							onClick={() => acceptFriendsReqClick(el.id)}
-						/>
-						<GoTrashcan
-							key={generateKey('del-friendReq', index)}
-							color='red'
-							size={25}
-							onClick={() => removeFriendsReqClick(el.id)}
-						/>
+					<div
+						key={generateKey('div-friendReq', index)}
+						className='card w-25 m-1'
+					>
+						<div className='card-body'>
+							<h3
+								key={generateKey('name-friendReq', index)}
+								className='card-title'
+							>
+								{el.firstName} {el.lastName}
+							</h3>
+							<h5
+								key={generateKey('email-friendReq', index)}
+								className='card-text'
+							>
+								{el.email}
+							</h5>
+							<div className='d-flex'>
+								<FaGithubAlt
+									key={generateKey('accept-friendReq', index)}
+									color='green'
+									size={25}
+									onClick={() => acceptFriendsReqClick(el.id)}
+								/>
+								<GoTrashcan
+									key={generateKey('del-friendReq', index)}
+									color='red'
+									size={25}
+									onClick={() => removeFriendsReqClick(el.id)}
+								/>
+							</div>
+						</div>
 					</div>
 				))
 			) : (
 				<></>
 			)}{' '}
-		</>
+		</div>
 	);
 };
 

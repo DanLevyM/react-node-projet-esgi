@@ -39,22 +39,27 @@ const BlockedUsersList = ({ open }) => {
 	};
 
 	return (
-		<div>
-			<h1>Users blocked list</h1>
+		<div className='d-flex align-content-start justify-content-around flex-wrap w-100 mt-5'>
 			{!isLoading ? (
 				usersBlocked.map((el, index) => (
-					<div key={generateKey('div', index)}>
-						<h3 key={generateKey('name', index)}>
-							{el.firstName} {el.lastName}
-						</h3>
-						<h3 key={generateKey('email', index)}>{el.email}</h3>
-						<div key={generateKey('fa-cont', index)}>
-							<button
-								className='btn btn-danger'
-								onClick={() => unBlockUserClick(el.id)}
-							>
-								Unblock
-							</button>
+					<div key={generateKey('div', index)} className='card w-25 m-1'>
+						<div className='card-body'>
+							<div className='card-title'>
+								<h3 key={generateKey('name', index)}>
+									{el.firstName} {el.lastName}
+								</h3>
+							</div>
+							<h5 key={generateKey('email', index)} className='card-text'>
+								{el.email}
+							</h5>
+							<div key={generateKey('fa-cont', index)}>
+								<button
+									className='btn btn-danger'
+									onClick={() => unBlockUserClick(el.id)}
+								>
+									Unblock
+								</button>
+							</div>
 						</div>
 					</div>
 				))

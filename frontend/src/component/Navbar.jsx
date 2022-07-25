@@ -20,18 +20,22 @@ const Navbar = () => {
 	};
 
 	return (
-		<nav>
-			<ul>
-				<li>
-					<Link to={'/'}>Home</Link>
-				</li>
+		<nav className='navbar navbar-light bg-light px-3'>
+			<Link to={'/'} className='navbar-brand'>
+				Home
+			</Link>
+			<ul className='nav nav-pills'>
 				{userRole() === 'admin' || userRole() === 'user' ? (
 					<>
-						<li>
-							<Link to={'/relations'}>Relations</Link>
+						<li className='nav-item'>
+							<Link className='nav-link' to={'/relations'}>
+								Relations
+							</Link>
 						</li>
-						<li>
-							<Link to={'/profile'}>Profile</Link>
+						<li className='nav-item'>
+							<Link className='nav-link' to={'/profile'}>
+								Profile
+							</Link>
 						</li>
 					</>
 				) : (
@@ -39,24 +43,30 @@ const Navbar = () => {
 				)}
 
 				{userRole() === 'admin' ? (
-					<li>
-						<Link to={'/admin'}>Dashboard</Link>
+					<li className='nav-item'>
+						<Link className='nav-link' to={'/admin'}>
+							Dashboard
+						</Link>
 					</li>
 				) : (
 					<></>
 				)}
 				{!userIsAuth() ? (
 					<>
-						<li>
-							<Link to={'/login'}>Login</Link>
+						<li className='nav-item'>
+							<Link className='nav-link' to={'/login'}>
+								Login
+							</Link>
 						</li>
-						<li>
-							<Link to={'/register'}>Register</Link>
+						<li className='nav-item'>
+							<Link className='nav-link' to={'/register'}>
+								Register
+							</Link>
 						</li>
 					</>
 				) : (
-					<li onClick={() => logoutUser()}>
-						<p>Logout</p>
+					<li className='nav-item' onClick={() => logoutUser()}>
+						<p className='nav-link'>Logout</p>
 					</li>
 				)}
 			</ul>
