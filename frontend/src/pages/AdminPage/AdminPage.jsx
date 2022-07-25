@@ -14,9 +14,10 @@ const AdminPage = () => {
 	const [isOtherButton, setOtherButton] = useState(false);
 
 	return (
-		<div>
-			<div>
+		<div className='container-fluid'>
+			<div className='btn-group d-flex justify-content-center'>
 				<button
+					className='btn btn-secondary'
 					onClick={() => {
 						setIsUserList(true);
 						setOtherButton(false);
@@ -25,6 +26,7 @@ const AdminPage = () => {
 					Show users
 				</button>
 				<button
+					className='btn btn-secondary'
 					onClick={() => {
 						setOtherButton(true);
 						setIsUserList(false);

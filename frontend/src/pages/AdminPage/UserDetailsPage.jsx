@@ -52,35 +52,77 @@ const UserDetailsPage = () => {
 	};
 
 	return (
-		<div>
-			<h1>Update user</h1>
+		<div
+			className='mx-auto mt-5 p-2 border border-1 rounded'
+			style={{ width: '500px' }}
+		>
 			<form onSubmit={handleFormUpdateUserByAdmin}>
-				<div>
-					<label htmlFor='email'>Email</label>
-					<input type='text' name='email' defaultValue={user.email} />
+				<div className='form-group row p-1'>
+					<label htmlFor='email' className='col-sm-2 col-form-label'>
+						Email
+					</label>
+					<div className='col-sm-10'>
+						<input
+							className='form-control'
+							type='text'
+							name='email'
+							defaultValue={user.email}
+						/>
+					</div>
 				</div>
-				<div>
-					<label htmlFor='firstName'>Firstname</label>
-					<input type='text' name='firstName' defaultValue={user.firstName} />
+				<div className='form-group row p-1'>
+					<label htmlFor='firstName' className='col-sm-2 col-form-label'>
+						Firstname
+					</label>
+					<div className='col-sm-10'>
+						<input
+							className='form-control'
+							type='text'
+							name='firstName'
+							defaultValue={user.firstName}
+						/>
+					</div>
 				</div>
-				<div>
-					<label htmlFor='lastName'>Lastname</label>
-					<input type='text' name='lastName' defaultValue={user.lastName} />
+				<div className='form-group row p-1'>
+					<label htmlFor='lastName' className='col-sm-2 col-form-label'>
+						Lastname
+					</label>
+					<div className='col-sm-10'>
+						<input
+							className='form-control'
+							type='text'
+							name='lastName'
+							defaultValue={user.lastName}
+						/>
+					</div>
 				</div>
-				<div>
-					<label htmlFor='password'>Password</label>
-					<input type='password' name='password' autoComplete='true' />
+				<div className='form-group row p-1'>
+					<label htmlFor='password' className='col-sm-2 col-form-label'>
+						Password
+					</label>
+					<div className='col-sm-10'>
+						<input
+							className='form-control'
+							type='password'
+							name='password'
+							autoComplete='true'
+						/>
+					</div>
 				</div>
-				<button type='submit' className='btn btn-primary btn-lg'>
-					Update user
-				</button>
+				<div className='text-center m-2'>
+					<button type='submit' className='btn btn-primary btn-lg w-100'>
+						Update user
+					</button>
+				</div>
 			</form>
-			<button
-				className='btn btn-danger btn-lg'
-				onClick={() => handleDeleteUser()}
-			>
-				Delete user
-			</button>
+			<div className='text-center m-2'>
+				<button
+					className='btn btn-danger btn-lg w-100'
+					onClick={() => handleDeleteUser()}
+				>
+					Delete user
+				</button>
+			</div>
 		</div>
 	);
 };

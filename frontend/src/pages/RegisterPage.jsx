@@ -12,7 +12,7 @@ const LoginPage = () => {
 			password: e.target.elements.password.value,
 		});
 
-		registerUser(postData);
+		await registerUser(postData);
 	};
 
 	return (
@@ -21,7 +21,7 @@ const LoginPage = () => {
 			style={{ width: '500px' }}
 		>
 			<div className='pb-2 pt-2'>
-				<h1>Sign in</h1>
+				<h1>Sign up</h1>
 			</div>
 			<form onSubmit={handleRegisterForm} className='pb-3'>
 				<div className='form-group row p-1'>
@@ -34,6 +34,7 @@ const LoginPage = () => {
 							placeholder='user@gmail.com'
 							name='email'
 							className='form-control'
+							required
 						/>
 					</div>
 				</div>
@@ -43,10 +44,11 @@ const LoginPage = () => {
 					</label>
 					<div className='col-sm-10'>
 						<input
-							type='text'
+							type='password'
 							placeholder='Your password'
 							name='password'
 							className='form-control'
+							required
 						/>
 					</div>
 				</div>

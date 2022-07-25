@@ -39,32 +39,23 @@ const UsersList = ({ open }) => {
 	};
 
 	return (
-		<div>
+		<div className='d-flex align-content-start justify-content-around flex-wrap w-100 mt-3'>
 			{!isLoading ? (
 				users.map((el, index) => (
-					<div
-						key={generateKey('div', index)}
-						onClick={() => nav(`/admin/user/${el.id}`)}
-					>
-						<h3 key={generateKey('name', index)}>
-							{el.firstName} {el.lastName}
-						</h3>
-						<h3 key={generateKey('email', index)}>{el.email}</h3>
-
-						{/* <div key={generateKey('fa-cont', index)} ontainer}>
-							<AiFillPlusCircle
-								key={generateKey('upd', index)}
-								color='white'
-								size={25}
-								tem}
-							/>
-							<GoTrashcan
-								key={generateKey('del', index)}
-								color='red'
-								size={25}
-								tem}
-							/>
-						</div> */}
+					<div key={generateKey('div', index)} className='card w-25 m-1'>
+						<div className='card-body'>
+							<div
+								key={generateKey('div', index)}
+								onClick={() => nav(`/admin/user/${el.id}`)}
+							>
+								<h3 key={generateKey('name', index)} className='card-title'>
+									{el.firstName} {el.lastName}
+								</h3>
+								<h5 key={generateKey('email', index)} className='card-text'>
+									{el.email}
+								</h5>
+							</div>
+						</div>{' '}
 					</div>
 				))
 			) : (
