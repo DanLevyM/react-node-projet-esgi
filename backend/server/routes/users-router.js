@@ -6,12 +6,19 @@ const {
 	deleteMe,
 	updateMe,
 	getMe,
+	forgotPassword,
+	resetPassword,
+	updateMeAfterResetPwd,
 } = require('../controllers/user-controller');
 
 const router = new Router();
 
 router.route('/');
 router.route('/').get(checkAuthentication, getUsers);
+router.route('/forgotpassword').post(forgotPassword);
+router.route('/resetpassword').put(resetPassword);
+router.route('/update-pwd-after-reset').put(updateMeAfterResetPwd);
+
 router
 	.route('/me')
 	.get(checkAuthentication, getMe)

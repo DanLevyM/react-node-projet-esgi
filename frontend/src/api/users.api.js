@@ -42,3 +42,44 @@ export const deleteMe = async (token) => {
 	});
 	return res.json();
 };
+
+export const forgotPassword = async (body) => {
+	const res = await fetch('http://localhost:3001/api/v1/users/forgotpassword', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(body),
+	});
+	return res.json();
+};
+
+export const resetPassword = async (resettoken) => {
+	const res = await fetch(
+		`http://localhost:3001/api/v1/users/resetpassword?resettoken=${resettoken}`,
+		{
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		}
+	);
+	return res.json();
+};
+
+export const updatePwdAfterResetToken = async (resettoken, password) => {
+	const res = await fetch(
+		'http://localhost:3001/api/v1/users/update-pwd-after-reset',
+		{
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				resetPwdToken: resettoken,
+				password,
+			}),
+		}
+	);
+	return res.json();
+};

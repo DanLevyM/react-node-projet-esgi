@@ -55,6 +55,14 @@ User.init(
 			type: DataTypes.STRING,
 			allowNull: true,
 		},
+		resetPwdToken: {
+			type: DataTypes.STRING,
+			allowNull: true,
+		},
+		resetPwdExpire: {
+			type: DataTypes.DATE,
+			allowNull: true,
+		},
 		technologies: {
 			type: DataTypes.ARRAY(DataTypes.STRING),
 			allowNull: true,
