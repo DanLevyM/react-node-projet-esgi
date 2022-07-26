@@ -54,11 +54,13 @@ exports.updateMe = asyncHandler(async (req, res) => {
 		individualHooks: true,
 	});
 
-	if (!rows[0]) {
-		res.sendStatus(404);
-	} else {
-		res.json(rows[0]);
-	}
+	console.log(res.json(rows[0]));
+
+	// if (!rows[0]) {
+	// 	res.sendStatus(404);
+	// } else {
+	// 	res.json(rows[0]);
+	// }
 });
 
 // @desc    Get my profile

@@ -34,6 +34,9 @@ const HomePage = () => {
 					<h1>
 						Welcome {me.firstName} {me.lastName} !
 					</h1>
+					{me.technologies.map((el, index) => (
+						<h3 key={index}>{el}</h3>
+					))}
 				</div>
 			) : (
 				<></>

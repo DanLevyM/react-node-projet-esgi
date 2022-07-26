@@ -21,6 +21,7 @@ export const getMe = async (token) => {
 };
 
 export const updateMe = async (token, body) => {
+	console.log(JSON.stringify(body));
 	const res = await fetch('http://localhost:3001/api/v1/users/me', {
 		method: 'PUT',
 		headers: {
