@@ -19,3 +19,8 @@ exports.sendPost = asyncHandler(async (req, res, next) => {
 	if (result) res.json(result, 201);
 	res.json('Post not sent.', 400);
 });
+
+exports.getPosts = asyncHandler(async (req, res) => {
+	const result = await Post.findAll();
+	res.json(result);
+});
