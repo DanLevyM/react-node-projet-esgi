@@ -6,9 +6,10 @@ const { asyncHandler } = require('../middlewares/async');
 const ErrorResponse = require('../utils/errorResponse');
 const User = require('../models/postgres/User');
 
-// @path    POST /api/v1/friends/add
+// @path    POST /api/v1/home/add
 // @access  Private
-// @body		{ id_user_reported: int }
+// @body		{ user_post: int }
+// @body		{ content: string }
 exports.sendPost = asyncHandler(async (req, res, next) => {
 
 	const data = {
