@@ -5,6 +5,11 @@ class Post extends Model {}
 
 Post.init(
 	{
+		user_name: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			require: true,
+		},
 		user_post: {
 			type: DataTypes.INTEGER,
 			allowNull: false,

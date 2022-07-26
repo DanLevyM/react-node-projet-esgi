@@ -7,7 +7,7 @@ import { getPosts } from '../api/posts.api';
 const HomePage = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [me, setMe] = useState({});
-	const [posts, getPosts] = useState({});
+	const [posts, setPosts] = useState({});
 
 	useEffect(() => {
 		let isCancelled = false;
@@ -19,7 +19,7 @@ const HomePage = () => {
 			if (!isCancelled) {
 				setIsLoading(false);
 				setMe(res);
-				getPosts(resPosts);
+				setPosts(await resPosts);
 			}
 		};
 
@@ -33,19 +33,28 @@ const HomePage = () => {
 		};
 	}, []);
 
+	const generateKey = (str, index) => {
+		return `${str}-${index}`;
+	};
+
 	return (
-		<div>
+		<div className='container-fluid'>
 			<h1>
 				Welcome {me.firstName} {me.lastName} !
 			</h1>
 			{!isLoading ? (
-					posts.posts.map((post) => (
-						<div key={generateKey()} >ntm</div>
-						
-					)
-					
-				
-			)) : (
+				posts.map((el, index) => (
+					<div
+						key={generateKey('div', index)}
+						className='d-flex flex-column text-wrap p-3 m-2 border shadow rounded bg-info w-75 mx-auto'
+					>
+						<h5 className=''>{el.user_name}</h5>
+						<p key={generateKey('text', index)} className=''>
+							{el.content}
+						</p>
+					</div>
+				))
+			) : (
 				<></>
 			)}
 		</div>

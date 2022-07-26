@@ -11,10 +11,11 @@ const User = require('../models/postgres/User');
 // @body		{ user_post: int }
 // @body		{ content: string }
 exports.sendPost = asyncHandler(async (req, res, next) => {
-
+console.log(req.user.firstName);
 	const data = {
+		user_name: req.user.firstName,
 		user_post: req.user.id,
-		content: req.body.comment,
+		content: req.body.content,
 	};
 	const result = await Post.create(data);
 	if (result) res.json(result, 201);
