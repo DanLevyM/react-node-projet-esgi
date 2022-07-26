@@ -70,7 +70,6 @@ const UsersList = ({ open }) => {
 
 	const blockUserClick = async (id) => {
 		const res = await blockUser(localStorage.getItem('token'), id);
-		console.log(id, res);
 		setIsListUpdt(Math.random());
 	};
 
@@ -87,6 +86,14 @@ const UsersList = ({ open }) => {
 							</div>
 							<div className='card-text'>
 								<h5 key={generateKey('email', index)}>{el.email}</h5>
+							</div>
+							<div
+								key={generateKey('techno-div', index)}
+								className='card-text d-flex flex-row'
+							>
+								{el.technologies.map((el, index) => (
+									<p key={generateKey('techno-div', index)}>{el}&nbsp;</p>
+								))}
 							</div>
 							<div key={generateKey('fa-cont', index)} className='d-flex'>
 								<AiFillPlusCircle
