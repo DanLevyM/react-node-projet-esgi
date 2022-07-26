@@ -42,6 +42,8 @@ const HomePage = () => {
 			<h1>
 				Welcome {me.firstName} {me.lastName} !
 			</h1>
+      <p>{me.technologies.map((el, index) => (
+						<h3 key={index}>{el}</p>
 			{!isLoading ? (
 				posts.map((el, index) => (
 					<div

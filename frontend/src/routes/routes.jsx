@@ -1,5 +1,11 @@
 import React, { useContext } from 'react';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import {
+	BrowserRouter,
+	Route,
+	Routes,
+	Navigate,
+	useParams,
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import UserContext from '../context/UserContext';
@@ -11,6 +17,8 @@ import AdminPage from '../pages/AdminPage/AdminPage';
 import UserRelationsPage from '../pages/UserRelationsPage';
 import ProfilePage from '../pages/ProfilePage';
 import UserDetailsPage from '../pages/AdminPage/UserDetailsPage';
+import ForgotPasswordPage from '../pages/ForgotPasswordPage';
+import ResetPasswordPage from '../pages/ResetPasswordPage';
 
 const OnlyWhen = ({ condition, otherwise, children }) => {
 	return condition ? children : <Navigate to={otherwise} />;
@@ -18,6 +26,7 @@ const OnlyWhen = ({ condition, otherwise, children }) => {
 
 export default function MyRouter() {
 	const { user } = useContext(UserContext);
+	let { resettoken } = useParams();
 
 	return (
 		<>
@@ -90,6 +99,11 @@ export default function MyRouter() {
 								<AdminPage />
 							</OnlyWhen>
 						}
+					/>
+					<Route path='/forgotpassword' element={<ForgotPasswordPage />} />
+					<Route
+						path='/resetpassword/:resettoken'
+						element={<ResetPasswordPage />}
 					/>
 				</Routes>
 			</BrowserRouter>

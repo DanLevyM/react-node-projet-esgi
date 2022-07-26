@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 import { getMe, updateMe, deleteMe } from '../api/users.api';
 
-const Profile = () => {
+const Profile = ({ open }) => {
+	if (!open) return null;
+
 	const [user, setUser] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
 	const { authUser } = useContext(UserContext);
@@ -134,6 +137,10 @@ const Profile = () => {
 			)}
 		</div>
 	);
+};
+
+Profile.propTypes = {
+	open: PropTypes.bool,
 };
 
 export default Profile;

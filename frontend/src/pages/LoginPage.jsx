@@ -91,6 +91,9 @@ const LoginPage = () => {
 					</p>
 				</div>
 			</form>
+			<p style={{ cursor: 'pointer' }} onClick={() => nav('/forgotpassword')}>
+				Forgot your password ?
+			</p>
 		</div>
 	);
 };
