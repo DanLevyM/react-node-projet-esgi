@@ -1,11 +1,11 @@
-export const addPost = async (postData) => {
+export const addPost = async (token, body) => {
 	const res = await fetch('http://localhost:3001/api/v1/home/add', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
 		},
-		body: postData,
+		body: JSON.stringify(body),
 	});
 
 	return res.status;

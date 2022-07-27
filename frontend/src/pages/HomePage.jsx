@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { getMe } from '../api/users.api';
 import { getPosts } from '../api/posts.api';
+import Post from '../component/Post';
+
 
 const HomePage = () => {
 	const [isLoading, setIsLoading] = useState(true);
@@ -33,30 +35,12 @@ const HomePage = () => {
 		};
 	}, []);
 
-	const generateKey = (str, index) => {
-		return `${str}-${index}`;
-	};
-
 	return (
 		<div className='container-fluid'>
 			<h1>
 				Welcome {me.firstName} {me.lastName} !
 			</h1>
-			{!isLoading ? (
-				posts.map((el, index) => (
-					<div
-						key={generateKey('div', index)}
-						className='d-flex flex-column text-wrap p-3 m-2 border shadow rounded bg-info w-75 mx-auto'
-					>
-						<h5 className=''>{el.user_name}</h5>
-						<p key={generateKey('text', index)} className=''>
-							{el.content}
-						</p>
-					</div>
-				))
-			) : (
-				<></>
-			)}
+			{!isLoading ? posts.map((el, index) => <Post el={el} index={index} key={index}/>) : <></>}
 		</div>
 	);
 };
