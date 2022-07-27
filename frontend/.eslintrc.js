@@ -1,38 +1,55 @@
 module.exports = {
-	'env': {
-		'browser': true,
-		'es2021': true
+	env: {
+		browser: true,
+		es2021: true,
 	},
-	'extends': [
-		'eslint:recommended',
-		'plugin:react/recommended'
-	],
-	'parserOptions': {
-		'ecmaFeatures': {
-			'jsx': true
+	extends: 'plugin:react/recommended',
+	parserOptions: {
+		ecmaFeatures: {
+			jsx: true,
 		},
-		'ecmaVersion': 'latest',
-		'sourceType': 'module'
+		ecmaVersion: 'latest',
+		sourceType: 'module',
 	},
-	'plugins': [
-		'react'
-	],
-	'rules': {
-		'indent': [
-			'error',
-			'tab'
-		],
-		'linebreak-style': [
-			'error',
-			'unix'
-		],
-		'quotes': [
-			'error',
-			'single'
-		],
-		'semi': [
-			'error',
-			'always'
-		]
-	}
+	plugins: ['react'],
+	rules: {},
 };
+
+// module.exports = {
+// 	'env': {
+// 		'browser': true,
+// 		'es2021': true
+// 	},
+// 	'extends': [
+// 		'eslint:recommended',
+// 		'plugin:react/recommended'
+// 	],
+// 	'parserOptions': {
+// 		'ecmaFeatures': {
+// 			'jsx': true
+// 		},
+// 		'ecmaVersion': 'latest',
+// 		'sourceType': 'module'
+// 	},
+// 	'plugins': [
+// 		'react'
+// 	],
+// 	'rules': {
+// 		'indent': [
+// 			'error',
+// 			'tab'
+// 		],
+// 		'linebreak-style': [
+// 			'error',
+// 			'unix'
+// 		],
+// 		'quotes': [
+// 			'error',
+// 			'single'
+// 		],
+// 		'semi': [
+// 			'error',
+// 			'always'
+// 		]
+// 	}
+// };

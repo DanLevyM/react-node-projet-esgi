@@ -16,6 +16,7 @@ exports.showFriendsList = asyncHandler(async (req, res, next) => {
 
 	const relations = await getUserRelations(req.params.id);
 
+	console.log(relations);
 	if (relations.length === 0) return res.json({ friends: [] }, 200);
 
 	const friendsToParse = getSpecificUserRelation('friends', relations);
@@ -73,6 +74,38 @@ exports.showPendingFriendsList = asyncHandler(async (req, res, next) => {
 	res.json({ friends: pendingsRequests });
 });
 
+// @path    GET /api/v1/friends/requests
+// @access  Private
+exports.showFriendsRequests = asyncHandler(async (req, res, next) => {
+	const relations = await getUserRelations(req.user.id);
+	const usersIdPendings = [];
+	relations.forEach((relation) => {
+		if (
+			relation.dataValues.user_low === req.user.id &&
+			relation.dataValues.status === 'user_high_pending_request'
+		) {
+			usersIdPendings.push(relation.dataValues.user_high);
+		} else if (
+			relation.dataValues.user_high === req.user.id &&
+			relation.dataValues.status === 'user_low_pending_request'
+		) {
+			usersIdPendings.push(relation.dataValues.user_low);
+		}
+	});
+
+	const pendingsRequests = [];
+	for (let i = 0; i < usersIdPendings.length; i++) {
+		const userFound = await User.findByPk(usersIdPendings[i]);
+		pendingsRequests.push({
+			email: userFound.dataValues.email,
+			firstName: userFound.dataValues.firstName,
+			lastName: userFound.dataValues.lastName,
+			id: userFound.dataValues.id,
+		});
+	}
+	res.json({ friends: pendingsRequests });
+});
+
 // @path    GET /api/v1/friends/users-blocked
 // @access  Private
 exports.showBlockedUsers = asyncHandler(async (req, res, next) => {
@@ -110,10 +143,10 @@ exports.showBlockedUsers = asyncHandler(async (req, res, next) => {
 // @body		{ id_receiver: int }
 exports.sendFriendRequest = asyncHandler(async (req, res, next) => {
 	if (req.user.id === parseInt(req.body.id_receiver))
-		return next(new ErrorResponse('Same ids.', 422));
+		return next(new ErrorResponse('Same ids.', 400));
 
 	if (!(await User.findByPk(req.body.id_receiver)))
-		return next(new ErrorResponse('User does not exist.', 422));
+		return next(new ErrorResponse('User does not exist.', 400));
 
 	const datas = orderUsersIds({
 		user_low: req.user.id,
@@ -124,9 +157,65 @@ exports.sendFriendRequest = asyncHandler(async (req, res, next) => {
 		where: { user_low: datas.user_low, user_high: datas.user_high },
 	});
 	if (relationAlreadyExists)
-		return next(new ErrorResponse('Relation already exists.', 422));
+		return next(new ErrorResponse('Relation already exists.', 400));
 	const result = await UsersRelations.create(datas);
 	if (result) res.json(result, 201);
+});
+
+// @path    DEL /api/v1/friends/add
+// @access  Private
+// @body		{ id_receiver: int }
+exports.deleteFriendRequest = asyncHandler(async (req, res, next) => {
+	if (req.user.id === parseInt(req.body.id_receiver))
+		return next(new ErrorResponse('Same ids.', 400));
+
+	if (!(await User.findByPk(req.body.id_receiver)))
+		return next(new ErrorResponse('User does not exist.', 400));
+
+	const datas = orderUsersIds({
+		user_low: req.user.id,
+		user_high: req.body.id_receiver,
+	});
+
+	const relationAlreadyExists = await UsersRelations.destroy({
+		where: {
+			[Op.and]: [{ user_low: datas.user_low }, { user_high: datas.user_high }],
+		},
+	});
+	if (relationAlreadyExists === 0)
+		return next(new ErrorResponse('Relation does not exist !', 400));
+	res.json({}, 204);
+});
+
+// @path    DEL /api/v1/friends/delete
+// @access  Private
+// @body		{ id_receiver: int }
+exports.deleteFriend = asyncHandler(async (req, res, next) => {
+	if (req.user.id === parseInt(req.body.id_receiver))
+		return next(new ErrorResponse('Same ids.', 400));
+
+	if (!(await User.findByPk(req.body.id_receiver)))
+		return next(new ErrorResponse('User does not exist.', 400));
+
+	const datas = orderUsersIds({
+		user_low: req.user.id,
+		user_high: req.body.id_receiver,
+	});
+
+	const relationAlreadyExists = await UsersRelations.findOne({
+		where: { user_low: datas.user_low, user_high: datas.user_high },
+	});
+	if (!relationAlreadyExists)
+		return next(new ErrorResponse('Relation does not exist.', 400));
+
+	console.log(relationAlreadyExists);
+	const result = await UsersRelations.destroy({
+		where: {
+			user_low: datas.user_low,
+			user_high: datas.user_high,
+		},
+	});
+	if (result) res.json(204);
 });
 
 // @path    POST /api/v1/friends/request-answer
@@ -134,18 +223,18 @@ exports.sendFriendRequest = asyncHandler(async (req, res, next) => {
 // @body		{ id_requester: int, answer: string }
 exports.answerFriendsRequest = asyncHandler(async (req, res, next) => {
 	if (req.user.id === parseInt(req.body.id_requester))
-		return next(new ErrorResponse('Same ids!', 422));
+		return next(new ErrorResponse('Same ids!', 400));
 
 	if (!parseInt(req.body.id_requester) || !req.body.answer)
-		return next(new ErrorResponse('Request cannot be processed.', 422));
+		return next(new ErrorResponse('Request cannot be processed.', 400));
 
 	if (req.body.answer !== 'accept' && req.body.answer !== 'decline')
-		return next(new ErrorResponse('#WRA.', 422)); // Wrong Response Answer
+		return next(new ErrorResponse('#WRA.', 400)); // Wrong Response Answer
 
 	const transmitterUser = await User.findOne({
 		where: { id: req.body.id_requester },
 	});
-	if (!transmitterUser) return next(new ErrorResponse('#NO', 422)); // No User
+	if (!transmitterUser) return next(new ErrorResponse('#NO', 400)); // No User
 
 	const usersRelation = await UsersRelations.findOne({
 		where: {
@@ -168,7 +257,7 @@ exports.answerFriendsRequest = asyncHandler(async (req, res, next) => {
 		},
 	});
 
-	if (!usersRelation) return next(new ErrorResponse('#NFRF', 422)); // No Friend Request Found
+	if (!usersRelation) return next(new ErrorResponse('#NFRF', 400)); // No Friend Request Found
 
 	if (req.body.answer === 'accept') {
 		usersRelation.update({ status: 'friends' });
@@ -183,10 +272,10 @@ exports.answerFriendsRequest = asyncHandler(async (req, res, next) => {
 
 exports.blockUser = asyncHandler(async (req, res, next) => {
 	if (!req.body.user_to_block)
-		return next(new ErrorResponse('Request cannot be processed.', 422));
+		return next(new ErrorResponse('Request cannot be processed.', 400));
 
 	if (req.user.id === parseInt(req.body.user_to_block))
-		return next(new ErrorResponse('Same ids!', 422));
+		return next(new ErrorResponse('Same ids!', 400));
 
 	const usersRelationExists = await UsersRelations.findOne({
 		where: {
@@ -206,7 +295,11 @@ exports.blockUser = asyncHandler(async (req, res, next) => {
 			],
 		},
 	});
-
+	console.log(
+		usersRelationExists,
+		typeof req.body.user_to_block,
+		typeof req.user.id
+	);
 	if (usersRelationExists) {
 		req.user.id < req.body.user_to_block
 			? usersRelationExists.update({ status: 'user_low_block_high' })
@@ -214,7 +307,7 @@ exports.blockUser = asyncHandler(async (req, res, next) => {
 		return res.json({ usersRelationExists });
 	} else {
 		req.user.id < req.body.user_to_block
-			? usersRelationExists.create({
+			? await UsersRelations.create({
 					user_low: req.user.id,
 					user_high: req.body.user_to_block,
 					status: 'user_low_block_high',
@@ -226,14 +319,15 @@ exports.blockUser = asyncHandler(async (req, res, next) => {
 			  });
 		res.json({}, 201);
 	}
+	next();
 });
 
 exports.unblockUser = asyncHandler(async (req, res, next) => {
 	if (!req.body.user_to_unblock)
-		return next(new ErrorResponse('Request cannot be processed.', 422));
+		return next(new ErrorResponse('Request cannot be processed.', 400));
 
 	if (req.user.id === parseInt(req.body.user_to_unblock))
-		return next(new ErrorResponse('Same ids!', 422));
+		return next(new ErrorResponse('Same ids!', 400));
 
 	const usersRelationExists = await UsersRelations.findOne({
 		where: {
@@ -260,7 +354,16 @@ exports.unblockUser = asyncHandler(async (req, res, next) => {
 		usersRelationExists.destroy();
 		return res.json({}, 204);
 	}
-	return next(new ErrorResponse('#NR', 422)); // No Relation
+	return next(new ErrorResponse('#NR', 400)); // No Relation
+});
+
+exports.getAllRelations = asyncHandler(async (req, res, next) => {
+	const relations = await UsersRelations.findAll({
+		where: {
+			[Op.or]: [{ user_low: req.user.id }, { user_high: req.user.id }],
+		},
+	});
+	return res.json(relations);
 });
 
 // ------------------------------------------------------------
