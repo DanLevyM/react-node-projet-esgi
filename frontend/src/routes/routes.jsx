@@ -19,7 +19,6 @@ import ProfilePage from '../pages/ProfilePage';
 import UserDetailsPage from '../pages/AdminPage/UserDetailsPage';
 import ForgotPasswordPage from '../pages/ForgotPasswordPage';
 import ResetPasswordPage from '../pages/ResetPasswordPage';
-import NewPostPage from '../pages/NewPostPage';
 
 const OnlyWhen = ({ condition, otherwise, children }) => {
 	return condition ? children : <Navigate to={otherwise} />;
@@ -106,16 +105,7 @@ export default function MyRouter() {
 						path='/resetpassword/:resettoken'
 						element={<ResetPasswordPage />}
 					/>
-					<Route
-						path='/newPost'
-						element={
-							<OnlyWhen condition={user.isAuth} otherwise='/login'>
-								<NewPostPage />
-							</OnlyWhen>
-						}
-					/>
 				</Routes>
-				
 			</BrowserRouter>
 		</>
 	);
