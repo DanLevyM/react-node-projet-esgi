@@ -24,7 +24,6 @@ const Post = ({ el, index }) => {
 		</div>
 	);
 };
-///
 Post.propTypes = {
 	el: PropTypes.object,
   index: PropTypes.number
