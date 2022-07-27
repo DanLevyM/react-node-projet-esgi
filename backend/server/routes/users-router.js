@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const checkAuthentication = require('../middlewares/check-auth');
+// const ResetPassword = require('.../frontend/src/pages/ResetPassword/index');
 const {
 	getUser,
 	getUsers,
@@ -11,6 +12,7 @@ const {
 const router = new Router();
 
 router.route('/');
+// router.route('/reset-password').get(ResetPassword, getUsers);
 router.route('/').get(checkAuthentication, getUsers);
 router
 	.route('/me')
