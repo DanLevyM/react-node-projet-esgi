@@ -21,12 +21,10 @@ const NewPostPage = () => {
 		user_post: user.id,
 	}
 
-	console.log(e.target.elements[0].value);
-
 		const code = await addPost(localStorage.getItem('token'), postData);
 		if (parseInt(code) === 201) nav('/');
 	};
-d
+
 	return (
 		<div
 			className='mx-auto mt-5 p-2 border border-1 rounded'
